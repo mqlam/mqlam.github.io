@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Computer Startup</title>
+    <title>mqlam</title>
 
     <style>
         * {
@@ -23,6 +23,7 @@
             position: fixed;
             inset: 0;
             background: #000;
+
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -33,6 +34,13 @@
             font-size: 48px;
             font-weight: bold;
             margin-bottom: 40px;
+        }
+
+        /* LOADING BAR */
+        #loadingSection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .loading-container {
@@ -64,6 +72,27 @@
             to {
                 width: 100%;
             }
+        }
+
+        /* LOGIN BUTTON */
+        #loginSection {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-button {
+            padding: 12px 45px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #ddd;
         }
 
         /* DESKTOP */
@@ -107,19 +136,33 @@
 
 <body>
 
-    <!-- STARTUP -->
+    <!-- STARTUP SCREEN -->
     <div id="startup">
 
         <div class="logo">
             NOVA
         </div>
 
-        <div class="loading-container">
-            <div class="loading-bar"></div>
+        <!-- LOADING -->
+        <div id="loadingSection">
+
+            <div class="loading-container">
+                <div class="loading-bar"></div>
+            </div>
+
+            <div class="loading-text">
+                Loading...
+            </div>
+
         </div>
 
-        <div class="loading-text">
-            Starting system...
+        <!-- LOGIN -->
+        <div id="loginSection">
+
+            <button class="login-button" onclick="login()">
+                LOGIN
+            </button>
+
         </div>
 
     </div>
@@ -129,29 +172,3 @@
     <div id="desktop">
 
         <div class="desktop-text">
-            Welcome
-        </div>
-
-        <div class="taskbar">
-            <div class="start-button">
-                ◉ Start
-            </div>
-        </div>
-
-    </div>
-
-
-    <script>
-
-        // Wait for the startup animation to finish
-        setTimeout(() => {
-
-            document.getElementById("startup").style.display = "none";
-            document.getElementById("desktop").style.display = "block";
-
-        }, 4500);
-
-    </script>
-
-</body>
-</html>
