@@ -1,1821 +1,2655 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mqlam</title>
 
-    <title>mqlam</title>
-
-
-    <!-- Instagram Icon -->
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+<!-- Instagram Icon -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
 
-    <style>
+<style>
 
-        /* ==================================================
-           GENERAL
-        ================================================== */
+/* =========================================================
+   GENERAL
+========================================================= */
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        body {
-            margin: 0;
-            background: white;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-
-        /* ==================================================
-           HERO
-        ================================================== */
-
-        .hero {
-            width: 100%;
-            height: 100vh;
-            min-height: 600px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            position: relative;
-
-            overflow: hidden;
-        }
+body {
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 
-        /* ==================================================
-           CD IMAGE
-        ================================================== */
+/* =========================================================
+   HERO
+========================================================= */
 
-        .cd {
-            position: absolute;
+.hero {
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
 
-            width: min(65vw, 700px);
-            height: min(65vw, 700px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-            left: 50%;
-            top: 50%;
-
-            transform:
-                translate(-50%, -50%)
-                rotate(0deg);
-
-            object-fit: contain;
-
-            z-index: 1;
-
-            pointer-events: none;
-
-            user-select: none;
-        }
+    position: relative;
+    overflow: hidden;
+}
 
 
-        /* ==================================================
-           LOGO SCENE
-        ================================================== */
+/* =========================================================
+   CD IMAGE
+========================================================= */
 
-        .scene {
-            perspective: 900px;
+.cd {
+    position: absolute;
 
-            position: relative;
+    width: min(65vw, 700px);
+    height: min(65vw, 700px);
 
-            z-index: 5;
-        }
+    left: 50%;
+    top: 50%;
 
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg);
 
-        /* ==================================================
-           LOGO
-        ================================================== */
+    object-fit: contain;
 
-        .logo {
-            position: relative;
+    z-index: 1;
 
-            display: inline-block;
-
-            font-size:
-                clamp(
-                    80px,
-                    14vw,
-                    220px
-                );
-
-            font-weight: 900;
-
-            letter-spacing:
-                -0.08em;
-
-            line-height: 1;
-
-            color: white;
-
-            -webkit-text-stroke:
-                5px black;
-
-            transform-style:
-                preserve-3d;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.15s ease-out;
-
-            paint-order:
-                stroke fill;
-
-            z-index: 5;
-        }
+    pointer-events: none;
+    user-select: none;
+}
 
 
-        /* ==================================================
-           COMIC SPIKES
-        ================================================== */
+/* =========================================================
+   LOGO
+========================================================= */
 
-        .logo::before {
-            content: "";
+.scene {
+    perspective: 900px;
 
-            position: absolute;
+    position: relative;
 
-            z-index: -1;
+    z-index: 5;
+}
 
-            left: -7%;
-            top: -15%;
+.logo {
+    position: relative;
 
-            width: 114%;
-            height: 130%;
+    display: inline-block;
 
-            background: black;
+    font-size:
+        clamp(
+            80px,
+            14vw,
+            220px
+        );
 
-            clip-path: polygon(
+    font-weight: 900;
 
-                0% 38%,
-                7% 35%,
-                2% 24%,
-                13% 27%,
-                10% 14%,
-                22% 20%,
-                20% 7%,
-                31% 16%,
-                34% 2%,
-                42% 14%,
-                50% 0%,
-                56% 14%,
-                67% 4%,
-                67% 17%,
-                80% 9%,
-                77% 22%,
-                92% 18%,
-                86% 31%,
-                100% 30%,
-                91% 40%,
-                100% 50%,
-                91% 57%,
-                99% 68%,
-                86% 67%,
-                91% 81%,
-                78% 76%,
-                80% 91%,
-                67% 83%,
-                64% 100%,
-                54% 87%,
-                45% 98%,
-                40% 85%,
-                28% 95%,
-                30% 81%,
-                17% 88%,
-                20% 74%,
-                6% 77%,
-                12% 64%,
-                0% 62%,
-                9% 51%
+    letter-spacing: -0.08em;
 
+    line-height: 1;
+
+    color: white;
+
+    -webkit-text-stroke: 5px black;
+
+    transform-style: preserve-3d;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease-out;
+
+    paint-order: stroke fill;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   COMIC SPIKES
+========================================================= */
+
+.logo::before {
+
+    content: "";
+
+    position: absolute;
+
+    z-index: -1;
+
+    left: -7%;
+    top: -15%;
+
+    width: 114%;
+    height: 130%;
+
+    background: black;
+
+    clip-path: polygon(
+
+        0% 38%,
+        7% 35%,
+        2% 24%,
+        13% 27%,
+        10% 14%,
+        22% 20%,
+        20% 7%,
+        31% 16%,
+        34% 2%,
+        42% 14%,
+        50% 0%,
+        56% 14%,
+        67% 4%,
+        67% 17%,
+        80% 9%,
+        77% 22%,
+        92% 18%,
+        86% 31%,
+        100% 30%,
+        91% 40%,
+        100% 50%,
+        91% 57%,
+        99% 68%,
+        86% 67%,
+        91% 81%,
+        78% 76%,
+        80% 91%,
+        67% 83%,
+        64% 100%,
+        54% 87%,
+        45% 98%,
+        40% 85%,
+        28% 95%,
+        30% 81%,
+        17% 88%,
+        20% 74%,
+        6% 77%,
+        12% 64%,
+        0% 62%,
+        9% 51%
+
+    );
+
+    transform:
+        translateZ(-10px);
+}
+
+
+/* =========================================================
+   INSTAGRAM BUTTON
+========================================================= */
+
+.instagram-button {
+
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+    color: black;
+
+    border: 2px solid black;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    font-size: 21px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+
+    z-index: 10;
+}
+
+.instagram-button:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.12);
+
+    background: black;
+    color: white;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll-indicator {
+
+    position: absolute;
+
+    bottom: 30px;
+    left: 30px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+    z-index: 10;
+}
+
+.scroll-indicator.hidden {
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GENERAL WORK SECTION
+========================================================= */
+
+.work-section {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        100px 6vw;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        baseline;
+
+    margin-bottom: 60px;
+
+    border-bottom:
+        2px solid black;
+
+    padding-bottom: 15px;
+}
+
+.section-title {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            90px
+        );
+
+    font-weight: 900;
+
+    letter-spacing:
+        -0.06em;
+}
+
+.section-number {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   PHOTOGRAPHY
+========================================================= */
+
+.photography {
+
+    background: white;
+    color: black;
+}
+
+.photo-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.photo-project {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #eeeeee;
+
+    aspect-ratio: 4 / 3;
+
+    cursor: pointer;
+}
+
+.photo-project.large {
+
+    grid-column:
+        span 2;
+
+    aspect-ratio:
+        16 / 8;
+}
+
+.photo-project img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.photo-project:hover img {
+
+    transform:
+        scale(1.05);
+}
+
+
+/* =========================================================
+   PROJECT INFO
+========================================================= */
+
+.project-info {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 25px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,0.85)
+        );
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.photo-project:hover
+.project-info {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.project-name {
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+}
+
+.project-type {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   VIDEOGRAPHY
+========================================================= */
+
+.videography {
+
+    background: black;
+    color: white;
+}
+
+.videography
+.section-header {
+
+    border-bottom-color:
+        white;
+}
+
+.video-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+.video-project {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #151515;
+
+    aspect-ratio:
+        16 / 9;
+
+    cursor: pointer;
+}
+
+.video-project.large {
+
+    grid-column:
+        span 2;
+
+    aspect-ratio:
+        21 / 9;
+}
+
+
+/* =========================================================
+   VIDEO THUMBNAILS
+========================================================= */
+
+.video-project video {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    pointer-events: none;
+}
+
+
+/*
+   Videos DO NOT play on hover.
+   They are only thumbnails.
+*/
+
+
+/* =========================================================
+   VIDEO PLAY BUTTON
+========================================================= */
+
+.play-button {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 65px;
+    height: 65px;
+
+    border:
+        2px solid white;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+
+    background:
+        rgba(0,0,0,0.25);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.video-project:hover
+.play-button {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.12);
+
+    background:
+        rgba(255,255,255,0.15);
+}
+
+
+/* =========================================================
+   VIDEO POPUP
+========================================================= */
+
+.video-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.94);
+
+    z-index: 2000;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.video-modal.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   VIDEO POPUP CONTENT
+========================================================= */
+
+.video-modal-content {
+
+    position: relative;
+
+    width: auto;
+    height: auto;
+
+    max-width: 90vw;
+    max-height: 85vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transform:
+        scale(0.92);
+
+    opacity: 0;
+
+    transition:
+        transform 0.45s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        ),
+
+        opacity 0.35s ease;
+}
+
+.video-modal.active
+.video-modal-content {
+
+    transform:
+        scale(1);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   ACTUAL VIDEO
+========================================================= */
+
+.video-modal video {
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 90vw;
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    background: black;
+}
+
+
+/* =========================================================
+   VIDEO CLOSE BUTTON
+========================================================= */
+
+.video-close {
+
+    position: absolute;
+
+    right: -60px;
+    top: -60px;
+
+    width: 50px;
+    height: 50px;
+
+    border:
+        2px solid white;
+
+    border-radius: 50%;
+
+    background:
+        transparent;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 10;
+}
+
+.video-close:hover {
+
+    background: white;
+
+    color: black;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   PHOTO GALLERY POPUP
+========================================================= */
+
+.gallery-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.94);
+
+    z-index: 1000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow-y: auto;
+
+    padding:
+        60px 5vw;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.gallery-modal.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   GALLERY ANIMATION
+========================================================= */
+
+.gallery-modal
+.gallery-header,
+
+.gallery-modal
+.gallery-grid {
+
+    opacity: 0;
+
+    transform:
+        translateY(30px)
+        scale(0.97);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
+}
+
+.gallery-modal.active
+.gallery-header,
+
+.gallery-modal.active
+.gallery-grid {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.gallery-modal.active
+.gallery-grid {
+
+    transition-delay:
+        0.08s;
+}
+
+
+/* =========================================================
+   GALLERY HEADER
+========================================================= */
+
+.gallery-header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom: 40px;
+
+    color: white;
+}
+
+.gallery-title {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            65px
+        );
+
+    font-weight: 900;
+
+    letter-spacing:
+        -0.05em;
+}
+
+
+/* =========================================================
+   GALLERY CLOSE
+========================================================= */
+
+.gallery-close {
+
+    width: 50px;
+    height: 50px;
+
+    border:
+        2px solid white;
+
+    border-radius: 50%;
+
+    background:
+        transparent;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.gallery-close:hover {
+
+    background: white;
+
+    color: black;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   GALLERY GRID
+========================================================= */
+
+.gallery-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    max-width:
+        1400px;
+
+    width: 100%;
+
+    margin:
+        0 auto;
+}
+
+.gallery-grid img {
+
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.gallery-grid img:first-child {
+
+    grid-column:
+        span 2;
+}
+
+
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+.contact-section {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        100px 6vw;
+
+    background: white;
+
+    color: black;
+}
+
+
+/* =========================================================
+   CONTACT HEADER
+========================================================= */
+
+.contact-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        baseline;
+
+    margin-bottom: 80px;
+
+    border-bottom:
+        2px solid black;
+
+    padding-bottom: 15px;
+}
+
+.contact-title {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            90px
+        );
+
+    font-weight: 900;
+
+    letter-spacing:
+        -0.06em;
+}
+
+.contact-number {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   CONTACT CONTAINER
+========================================================= */
+
+.contact-container {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10vw;
+
+    max-width:
+        1400px;
+
+    margin:
+        0 auto;
+}
+
+
+/* =========================================================
+   CONTACT LEFT
+========================================================= */
+
+.contact-big {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            50px,
+            7vw,
+            110px
+        );
+
+    line-height:
+        0.85;
+
+    font-weight: 900;
+
+    letter-spacing:
+        -0.07em;
+}
+
+.contact-description {
+
+    max-width:
+        450px;
+
+    margin-top: 50px;
+
+    font-size: 17px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONTACT DETAILS
+========================================================= */
+
+.contact-details {
+
+    margin-top: 60px;
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    gap: 30px;
+}
+
+.contact-details div {
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    gap: 8px;
+}
+
+.contact-details span {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.contact-details a {
+
+    color: black;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    width: fit-content;
+
+    border-bottom:
+        1px solid black;
+
+    padding-bottom: 3px;
+
+    transition:
+        opacity 0.2s ease;
+}
+
+.contact-details a:hover {
+
+    opacity: 0.5;
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.contact-form {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    gap: 30px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction:
+        column;
+
+    gap: 10px;
+}
+
+.form-group label {
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    border: none;
+
+    border-bottom:
+        2px solid black;
+
+    border-radius: 0;
+
+    background:
+        transparent;
+
+    padding:
+        12px 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 17px;
+
+    color: black;
+
+    outline: none;
+
+    resize: vertical;
+
+    transition:
+        border-bottom 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-bottom:
+        4px solid black;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color: #999;
+}
+
+
+/* =========================================================
+   CONTACT SUBMIT BUTTON
+========================================================= */
+
+.contact-submit {
+
+    margin-top: 10px;
+
+    width: 100%;
+
+    padding:
+        22px 25px;
+
+    border:
+        2px solid black;
+
+    background: black;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.contact-submit span {
+
+    font-size: 25px;
+
+    line-height: 0;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.contact-submit:hover {
+
+    background: white;
+
+    color: black;
+}
+
+.contact-submit:hover span {
+
+    transform:
+        translateX(8px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding:
+        50px 6vw;
+
+    background: black;
+
+    color: white;
+
+    border-top:
+        2px solid white;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .work-section {
+
+        padding:
+            70px 20px;
+    }
+
+
+    .photo-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .photo-project.large {
+
+        grid-column:
+            span 1;
+
+        aspect-ratio:
+            4 / 3;
+    }
+
+
+    .video-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .video-project.large {
+
+        grid-column:
+            span 1;
+
+        aspect-ratio:
+            16 / 9;
+    }
+
+
+    .gallery-modal {
+
+        padding:
+            30px 20px;
+    }
+
+
+    .gallery-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .gallery-grid img:first-child {
+
+        grid-column:
+            span 1;
+    }
+
+
+    .scroll-indicator {
+
+        display: none;
+    }
+
+
+    .cd {
+
+        width: 90vw;
+        height: 90vw;
+    }
+
+
+    .video-modal {
+
+        padding: 20px;
+    }
+
+
+    .video-modal video {
+
+        max-width: 95vw;
+        max-height: 80vh;
+    }
+
+
+    .video-close {
+
+        right: 0;
+        top: -60px;
+    }
+
+
+    .contact-section {
+
+        padding:
+            70px 20px;
+    }
+
+
+    .contact-header {
+
+        margin-bottom:
+            50px;
+    }
+
+
+    .contact-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 70px;
+    }
+
+
+    .contact-big {
+
+        font-size:
+            clamp(
+                55px,
+                17vw,
+                100px
             );
+    }
 
-            transform:
-                translateZ(-10px);
-        }
 
+    .contact-description {
 
-        /* ==================================================
-           INSTAGRAM BUTTON
-        ================================================== */
+        margin-top:
+            35px;
+    }
 
-        .instagram-button {
-            position: absolute;
 
-            bottom: 35px;
-            left: 50%;
+    .contact-details {
 
-            transform:
-                translateX(-50%);
+        margin-top:
+            40px;
+    }
 
-            width: 45px;
-            height: 45px;
+}
 
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            background: white;
-            color: black;
-
-            border:
-                2px solid black;
-
-            border-radius: 50%;
-
-            text-decoration: none;
-
-            font-size: 21px;
-
-            transition:
-                transform 0.2s ease,
-                background 0.2s ease,
-                color 0.2s ease;
-
-            z-index: 10;
-        }
-
-
-        .instagram-button:hover {
-            transform:
-                translateX(-50%)
-                scale(1.12);
-
-            background: black;
-            color: white;
-        }
-
-
-        /* ==================================================
-           SCROLL INDICATOR
-        ================================================== */
-
-        .scroll-indicator {
-            position: absolute;
-
-            bottom: 30px;
-            left: 30px;
-
-            font-size: 12px;
-
-            font-weight: bold;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-
-            transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
-
-            z-index: 10;
-        }
-
-
-        .scroll-indicator.hidden {
-            opacity: 0;
-
-            transform:
-                translateY(10px);
-
-            pointer-events: none;
-        }
-
-
-        /* ==================================================
-           WORK SECTION
-        ================================================== */
-
-        .work-section {
-            width: 100%;
-
-            min-height: 100vh;
-
-            padding:
-                100px 6vw;
-        }
-
-
-        /* ==================================================
-           SECTION HEADER
-        ================================================== */
-
-        .section-header {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                baseline;
-
-            margin-bottom: 60px;
-
-            border-bottom:
-                2px solid black;
-
-            padding-bottom: 15px;
-        }
-
-
-        .section-title {
-            margin: 0;
-
-            font-size:
-                clamp(
-                    40px,
-                    6vw,
-                    90px
-                );
-
-            font-weight: 900;
-
-            letter-spacing:
-                -0.06em;
-        }
-
-
-        .section-number {
-            font-size: 14px;
-
-            font-weight: bold;
-
-            letter-spacing: 2px;
-        }
-
-
-        /* ==================================================
-           PHOTOGRAPHY
-        ================================================== */
-
-        .photography {
-            background: white;
-            color: black;
-        }
-
-
-        .photo-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 25px;
-        }
-
-
-        .photo-project {
-            position: relative;
-
-            overflow: hidden;
-
-            background: #eeeeee;
-
-            aspect-ratio: 4 / 3;
-
-            cursor: pointer;
-        }
-
-
-        .photo-project.large {
-            grid-column:
-                span 2;
-
-            aspect-ratio:
-                16 / 8;
-        }
-
-
-        .photo-project img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-
-            transition:
-                transform 0.5s ease;
-        }
-
-
-        .photo-project:hover img {
-            transform:
-                scale(1.05);
-        }
-
-
-        /* ==================================================
-           PROJECT INFO
-        ================================================== */
-
-        .project-info {
-            position: absolute;
-
-            left: 0;
-            bottom: 0;
-
-            width: 100%;
-
-            padding: 25px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    transparent,
-                    rgba(
-                        0,
-                        0,
-                        0,
-                        0.85
-                    )
-                );
-
-            opacity: 0;
-
-            transform:
-                translateY(10px);
-
-            transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
-        }
-
-
-        .photo-project:hover
-        .project-info {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-
-        .project-name {
-            font-size: 24px;
-
-            font-weight: 800;
-
-            margin-bottom: 5px;
-        }
-
-
-        .project-type {
-            font-size: 12px;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-        }
-
-
-        /* ==================================================
-           VIDEOGRAPHY
-        ================================================== */
-
-        .videography {
-            background: black;
-            color: white;
-        }
-
-
-        .videography
-        .section-header {
-            border-bottom-color:
-                white;
-        }
-
-
-        .video-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 25px;
-        }
-
-
-        .video-project {
-            position: relative;
-
-            overflow: hidden;
-
-            background: #151515;
-
-            aspect-ratio:
-                16 / 9;
-
-            cursor: pointer;
-        }
-
-
-        .video-project.large {
-            grid-column:
-                span 2;
-
-            aspect-ratio:
-                21 / 9;
-        }
-
-
-        .video-project video {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            display: block;
-        }
-
-
-        /* ==================================================
-           VIDEO PLAY BUTTON
-        ================================================== */
-
-        .play-button {
-            position: absolute;
-
-            top: 50%;
-            left: 50%;
-
-            transform:
-                translate(
-                    -50%,
-                    -50%
-                );
-
-            width: 65px;
-            height: 65px;
-
-            border:
-                2px solid white;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            justify-content:
-                center;
-
-            align-items:
-                center;
-
-            font-size: 20px;
-
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease;
-        }
-
-
-        .video-project:hover
-        .play-button {
-            transform:
-                translate(
-                    -50%,
-                    -50%
-                )
-                scale(1.15);
-
-            background: white;
-
-            color: black;
-        }
-
-
-        /* ==================================================
-           GALLERY MODAL
-        ================================================== */
-
-        .gallery-modal {
-            position: fixed;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background:
-                rgba(
-                    0,
-                    0,
-                    0,
-                    0.94
-                );
-
-            z-index: 1000;
-
-            display: flex;
-
-            flex-direction: column;
-
-            overflow-y: auto;
-
-            padding:
-                60px 5vw;
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            transition:
-                opacity 0.35s ease,
-                visibility 0.35s ease;
-        }
-
-
-        .gallery-modal.active {
-            opacity: 1;
-
-            visibility: visible;
-        }
-
-
-        /* ==================================================
-           POPUP ANIMATION
-        ================================================== */
-
-        .gallery-modal
-        .gallery-header,
-
-        .gallery-modal
-        .gallery-grid {
-            opacity: 0;
-
-            transform:
-                translateY(30px)
-                scale(0.97);
-
-            transition:
-                opacity 0.45s ease,
-                transform 0.45s
-                cubic-bezier(
-                    0.16,
-                    1,
-                    0.3,
-                    1
-                );
-        }
-
-
-        .gallery-modal.active
-        .gallery-header,
-
-        .gallery-modal.active
-        .gallery-grid {
-            opacity: 1;
-
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-
-        .gallery-modal.active
-        .gallery-grid {
-            transition-delay:
-                0.08s;
-        }
-
-
-        /* ==================================================
-           GALLERY HEADER
-        ================================================== */
-
-        .gallery-header {
-            width: 100%;
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            margin-bottom: 40px;
-
-            color: white;
-        }
-
-
-        .gallery-title {
-            margin: 0;
-
-            font-size:
-                clamp(
-                    30px,
-                    5vw,
-                    65px
-                );
-
-            font-weight: 900;
-
-            letter-spacing:
-                -0.05em;
-        }
-
-
-        /* ==================================================
-           CLOSE BUTTON
-        ================================================== */
-
-        .gallery-close {
-            width: 50px;
-            height: 50px;
-
-            border:
-                2px solid white;
-
-            border-radius: 50%;
-
-            background:
-                transparent;
-
-            color: white;
-
-            font-size: 25px;
-
-            cursor: pointer;
-
-            display: flex;
-
-            justify-content:
-                center;
-
-            align-items:
-                center;
-
-            transition:
-                background 0.2s ease,
-                color 0.2s ease,
-                transform 0.2s ease;
-        }
-
-
-        .gallery-close:hover {
-            background: white;
-
-            color: black;
-
-            transform:
-                rotate(90deg);
-        }
-
-
-        /* ==================================================
-           GALLERY GRID
-        ================================================== */
-
-        .gallery-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-
-            max-width:
-                1400px;
-
-            width: 100%;
-
-            margin:
-                0 auto;
-        }
-
-
-        .gallery-grid img {
-            width: 100%;
-
-            height: auto;
-
-            display: block;
-
-            object-fit: cover;
-        }
-
-
-        .gallery-grid img:first-child {
-            grid-column:
-                span 2;
-        }
-
-
-        /* ==================================================
-           FOOTER
-        ================================================== */
-
-        footer {
-            padding:
-                50px 6vw;
-
-            background: black;
-
-            color: white;
-
-            border-top:
-                2px solid white;
-
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            font-size: 12px;
-
-            font-weight: bold;
-
-            letter-spacing: 1px;
-        }
-
-
-        /* ==================================================
-           MOBILE
-        ================================================== */
-
-        @media (max-width: 700px) {
-
-            .work-section {
-                padding:
-                    70px 20px;
-            }
-
-
-            .photo-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .photo-project.large {
-                grid-column:
-                    span 1;
-
-                aspect-ratio:
-                    4 / 3;
-            }
-
-
-            .gallery-modal {
-                padding:
-                    30px 20px;
-            }
-
-
-            .gallery-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .gallery-grid img:first-child {
-                grid-column:
-                    span 1;
-            }
-
-
-            .section-header {
-                margin-bottom:
-                    30px;
-            }
-
-
-            .scroll-indicator {
-                display: none;
-            }
-
-
-            .cd {
-                width: 90vw;
-                height: 90vw;
-            }
-
-        }
-
-    </style>
+</style>
 
 </head>
+
 
 
 <body>
 
 
-    <!-- ==================================================
-         HERO
-    ================================================== -->
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-    <section class="hero">
-
-        <img
-            src="images/cd.png"
-            class="cd"
-            id="cd"
-            alt=""
-        >
+<section class="hero">
 
 
-        <!-- LOGO -->
+    <!--
+        CD IMAGE
 
-        <div class="scene">
+        Put your CD image here:
 
-            <div
-                class="logo"
-                id="logo"
-            >
+        images/cd.png
+    -->
 
-                mqlam
-
-            </div>
-
-        </div>
-
-
-
-        <!-- INSTAGRAM -->
-
-        <a
-            href="https://www.instagram.com/mq.lam/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="instagram-button"
-            aria-label="Instagram"
-        >
-
-            <i
-                class="fa-brands
-                fa-instagram"
-            ></i>
-
-        </a>
+    <img
+        src="images/cd.png"
+        class="cd"
+        id="cd"
+        alt=""
+    >
 
 
+    <!-- LOGO -->
 
-        <!-- SCROLL -->
+    <div class="scene">
 
         <div
-            class="scroll-indicator"
+            class="logo"
+            id="logo"
         >
-
-            Scroll ↓
-
+            mqlam
         </div>
 
-
-    </section>
-
+    </div>
 
 
-    <!-- ==================================================
-         PHOTOGRAPHY
-    ================================================== -->
+    <!-- INSTAGRAM -->
 
-    <section
-        class="work-section photography"
-        id="photography"
+    <a
+        href="https://www.instagram.com/mq.lam/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram-button"
+        aria-label="Instagram"
     >
 
+        <i
+            class="fa-brands
+            fa-instagram"
+        ></i>
 
-        <div class="section-header">
+    </a>
 
 
-            <h2 class="section-title">
-
-                Photography
-
-            </h2>
-
-
-            <div class="section-number">
-
-                01 / 02
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="photo-grid">
-
-
-            <div
-                class="photo-project large"
-                onclick="
-                    openGallery('project1')
-                "
-            >
-
-                <img
-                    src="images/photo1.jpg"
-                    alt="Project One"
-                >
-
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project One
-                    </div>
-
-                    <div class="project-type">
-                        Photography
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="photo-project"
-                onclick="
-                    openGallery('project2')
-                "
-            >
-
-                <img
-                    src="images/photo2.jpg"
-                    alt="Project Two"
-                >
-
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Two
-                    </div>
-
-                    <div class="project-type">
-                        Portrait
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="photo-project"
-                onclick="
-                    openGallery('project3')
-                "
-            >
-
-                <img
-                    src="images/photo3.jpg"
-                    alt="Project Three"
-                >
-
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Three
-                    </div>
-
-                    <div class="project-type">
-                        Sports
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="photo-project"
-                onclick="
-                    openGallery('project4')
-                "
-            >
-
-                <img
-                    src="images/photo4.jpg"
-                    alt="Project Four"
-                >
-
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Four
-                    </div>
-
-                    <div class="project-type">
-                        Events
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="photo-project"
-                onclick="
-                    openGallery('project5')
-                "
-            >
-
-                <img
-                    src="images/photo5.jpg"
-                    alt="Project Five"
-                >
-
-
-                <div class="project-info">
-
-                    <div class="project-name">
-                        Project Five
-                    </div>
-
-                    <div class="project-type">
-                        Creative
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         VIDEOGRAPHY
-    ================================================== -->
-
-    <section
-        class="work-section videography"
-        id="videography"
-    >
-
-
-        <div class="section-header">
-
-
-            <h2 class="section-title">
-
-                Videos
-
-            </h2>
-
-
-            <div class="section-number">
-
-                02 / 02
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="video-grid">
-
-
-            <div
-                class="video-project large"
-            >
-
-                <video
-                    src="videos/video1.mov"
-                    muted
-                    loop
-                    playsinline
-                ></video>
-
-
-                <div class="play-button">
-
-                    <i
-                        class="fa-solid
-                        fa-play"
-                    ></i>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="video-project"
-            >
-
-                <video
-                    src="videos/video2.mp4"
-                    muted
-                    loop
-                    playsinline
-                ></video>
-
-
-                <div class="play-button">
-
-                    <i
-                        class="fa-solid
-                        fa-play"
-                    ></i>
-
-                </div>
-
-            </div>
-
-
-
-            <div
-                class="video-project"
-            >
-
-                <video
-                    src="videos/video3.mp4"
-                    muted
-                    loop
-                    playsinline
-                ></video>
-
-
-                <div class="play-button">
-
-                    <i
-                        class="fa-solid
-                        fa-play"
-                    ></i>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         GALLERY POPUP
-    ================================================== -->
+    <!-- SCROLL -->
 
     <div
-        class="gallery-modal"
-        id="galleryModal"
+        class="scroll-indicator"
     >
+        Scroll ↓
+    </div>
 
 
-        <div
-            class="gallery-header"
-        >
-
-            <h2
-                class="gallery-title"
-                id="galleryTitle"
-            >
-                Project
-            </h2>
+</section>
 
 
-            <button
-                class="gallery-close"
-                onclick="
-                    closeGallery()
-                "
-                aria-label="Close gallery"
-            >
-                ×
-            </button>
 
+<!-- =========================================================
+     PHOTOGRAPHY
+========================================================= -->
+
+<section
+    class="work-section photography"
+    id="photography"
+>
+
+
+    <div class="section-header">
+
+        <h2 class="section-title">
+            Photography
+        </h2>
+
+        <div class="section-number">
+            01 / 03
         </div>
-
-
-        <div
-            class="gallery-grid"
-            id="galleryGrid"
-        ></div>
-
 
     </div>
 
 
 
-    <!-- ==================================================
-         FOOTER
-    ================================================== -->
-
-    <footer>
-
-        <span>
-            MQLAM
-        </span>
-
-        <span>
-            © 2026
-        </span>
-
-    </footer>
+    <div class="photo-grid">
 
 
+        <!-- PROJECT 1 -->
 
-    <!-- ==================================================
-         JAVASCRIPT
-    ================================================== -->
+        <div
+            class="photo-project large"
+            onclick="
+                openGallery('project1')
+            "
+        >
 
-    <script>
+            <img
+                src="images/photo1.jpg"
+                alt="Project One"
+            >
 
 
-        /* ==================================================
-           3D LOGO HOVER
-        ================================================== */
+            <div class="project-info">
 
-        const logo =
-            document.getElementById(
-                "logo"
+                <div class="project-name">
+                    Project One
+                </div>
+
+                <div class="project-type">
+                    Photography
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 2 -->
+
+        <div
+            class="photo-project"
+            onclick="
+                openGallery('project2')
+            "
+        >
+
+            <img
+                src="images/photo2.jpg"
+                alt="Project Two"
+            >
+
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    Project Two
+                </div>
+
+                <div class="project-type">
+                    Portrait
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 3 -->
+
+        <div
+            class="photo-project"
+            onclick="
+                openGallery('project3')
+            "
+        >
+
+            <img
+                src="images/photo3.jpg"
+                alt="Project Three"
+            >
+
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    Project Three
+                </div>
+
+                <div class="project-type">
+                    Sports
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 4 -->
+
+        <div
+            class="photo-project"
+            onclick="
+                openGallery('project4')
+            "
+        >
+
+            <img
+                src="images/photo4.jpg"
+                alt="Project Four"
+            >
+
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    Project Four
+                </div>
+
+                <div class="project-type">
+                    Events
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROJECT 5 -->
+
+        <div
+            class="photo-project"
+            onclick="
+                openGallery('project5')
+            "
+        >
+
+            <img
+                src="images/photo5.jpg"
+                alt="Project Five"
+            >
+
+
+            <div class="project-info">
+
+                <div class="project-name">
+                    Project Five
+                </div>
+
+                <div class="project-type">
+                    Creative
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     VIDEOGRAPHY
+========================================================= -->
+
+<section
+    class="work-section videography"
+    id="videography"
+>
+
+
+    <div class="section-header">
+
+        <h2 class="section-title">
+            Videography
+        </h2>
+
+        <div class="section-number">
+            02 / 03
+        </div>
+
+    </div>
+
+
+
+    <div class="video-grid">
+
+
+        <!-- VIDEO 1 -->
+
+        <div
+            class="video-project large"
+            onclick="
+                openVideo('videos/video1.mp4')
+            "
+        >
+
+            <video
+                src="videos/video1.mp4"
+                muted
+                preload="metadata"
+                playsinline
+            ></video>
+
+
+            <div class="play-button">
+
+                <i
+                    class="fa-solid
+                    fa-play"
+                ></i>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 2 -->
+
+        <div
+            class="video-project"
+            onclick="
+                openVideo('videos/video2.mp4')
+            "
+        >
+
+            <video
+                src="videos/video2.mp4"
+                muted
+                preload="metadata"
+                playsinline
+            ></video>
+
+
+            <div class="play-button">
+
+                <i
+                    class="fa-solid
+                    fa-play"
+                ></i>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 3 -->
+
+        <div
+            class="video-project"
+            onclick="
+                openVideo('videos/video3.mp4')
+            "
+        >
+
+            <video
+                src="videos/video3.mp4"
+                muted
+                preload="metadata"
+                playsinline
+            ></video>
+
+
+            <div class="play-button">
+
+                <i
+                    class="fa-solid
+                    fa-play"
+                ></i>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PHOTOGRAPHY GALLERY POPUP
+========================================================= -->
+
+<div
+    class="gallery-modal"
+    id="galleryModal"
+>
+
+
+    <div
+        class="gallery-header"
+    >
+
+        <h2
+            class="gallery-title"
+            id="galleryTitle"
+        >
+            Project
+        </h2>
+
+
+        <button
+            class="gallery-close"
+            onclick="
+                closeGallery()
+            "
+            aria-label="Close gallery"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="gallery-grid"
+        id="galleryGrid"
+    ></div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     VIDEO POPUP
+========================================================= -->
+
+<div
+    class="video-modal"
+    id="videoModal"
+>
+
+
+    <div
+        class="video-modal-content"
+    >
+
+
+        <button
+            class="video-close"
+            onclick="
+                closeVideo()
+            "
+            aria-label="Close video"
+        >
+            ×
+        </button>
+
+
+        <video
+            id="popupVideo"
+            controls
+            playsinline
+        ></video>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section
+    class="contact-section"
+    id="contact"
+>
+
+
+    <div class="contact-header">
+
+        <h2 class="contact-title">
+            Contact
+        </h2>
+
+        <div class="contact-number">
+            03 / 03
+        </div>
+
+    </div>
+
+
+
+    <div class="contact-container">
+
+
+        <!-- CONTACT INFORMATION -->
+
+        <div class="contact-info">
+
+
+            <p class="contact-big">
+
+                LET'S
+                <br>
+                WORK
+                <br>
+                TOGETHER.
+
+            </p>
+
+
+            <p class="contact-description">
+
+                Have a project, shoot, or creative
+                idea in mind? Send me a message
+                and let's make something.
+
+            </p>
+
+
+            <div class="contact-details">
+
+
+                <div>
+
+                    <span>
+                        EMAIL
+                    </span>
+
+                    <a
+                        href="mailto:mqlamcreate@example.com"
+                    >
+                        mqlamcreate@example.com
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        INSTAGRAM
+                    </span>
+
+                    <a
+                        href="https://www.instagram.com/mq.lam/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        @YOUR_USERNAME
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FORMSPREE FORM -->
+
+        <form
+            class="contact-form"
+            action="https://formspree.io/f/mwleloew"
+            method="POST"
+        >
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+                <label for="subject">
+                    SUBJECT
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="What's this about?"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div class="form-group">
+
+                <label for="message">
+                    MESSAGE
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell me about your project..."
+                    rows="7"
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- SEND -->
+
+            <button
+                type="submit"
+                class="contact-submit"
+            >
+
+                SEND MESSAGE
+
+                <span>
+                    →
+                </span>
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <span>
+        MQLAM
+    </span>
+
+    <span>
+        © 2026
+    </span>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   3D LOGO HOVER
+========================================================= */
+
+const logo =
+    document.getElementById("logo");
+
+
+logo.addEventListener(
+    "mousemove",
+    (event) => {
+
+        const rect =
+            logo.getBoundingClientRect();
+
+
+        const x =
+            event.clientX -
+            (
+                rect.left +
+                rect.width / 2
             );
 
 
-        logo.addEventListener(
-            "mousemove",
-            (event) => {
-
-                const rect =
-                    logo.getBoundingClientRect();
-
-
-                const x =
-                    event.clientX -
-                    (
-                        rect.left +
-                        rect.width / 2
-                    );
-
-
-                const y =
-                    event.clientY -
-                    (
-                        rect.top +
-                        rect.height / 2
-                    );
-
-
-                const rotateY =
-                    (
-                        x /
-                        rect.width
-                    ) * 25;
-
-
-                const rotateX =
-                    -(
-                        y /
-                        rect.height
-                    ) * 25;
-
-
-                logo.style.transform = `
-
-                    rotateX(
-                        ${rotateX}deg
-                    )
-
-                    rotateY(
-                        ${rotateY}deg
-                    )
-
-                    scale(1.04)
-
-                `;
-
-            }
-        );
-
-
-        logo.addEventListener(
-            "mouseleave",
-            () => {
-
-                logo.style.transform = `
-
-                    rotateX(0deg)
-
-                    rotateY(0deg)
-
-                    scale(1)
-
-                `;
-
-            }
-        );
-
-
-
-        /* ==================================================
-           CD SCROLL ROTATION
-        ================================================== */
-
-        const cd =
-            document.getElementById(
-                "cd"
+        const y =
+            event.clientY -
+            (
+                rect.top +
+                rect.height / 2
             );
 
 
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                /*
-                    The CD rotates based on
-                    how far down the page you scroll.
-
-                    Increase 0.35 for faster rotation.
-                    Decrease 0.35 for slower rotation.
-                */
-
-                const rotation =
-                    window.scrollY * 0.35;
+        const rotateY =
+            (
+                x /
+                rect.width
+            ) * 25;
 
 
-                cd.style.transform = `
+        const rotateX =
+            -(
+                y /
+                rect.height
+            ) * 25;
 
-                    translate(
-                        -50%,
-                        -50%
-                    )
 
-                    rotate(
-                        ${rotation}deg
-                    )
+        logo.style.transform = `
 
-                `;
+            rotateX(
+                ${rotateX}deg
+            )
 
-            }
+            rotateY(
+                ${rotateY}deg
+            )
+
+            scale(1.04)
+
+        `;
+
+    }
+);
+
+
+logo.addEventListener(
+    "mouseleave",
+    () => {
+
+        logo.style.transform = `
+
+            rotateX(0deg)
+
+            rotateY(0deg)
+
+            scale(1)
+
+        `;
+
+    }
+);
+
+
+/* =========================================================
+   CD SCROLL ROTATION
+========================================================= */
+
+const cd =
+    document.getElementById("cd");
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const rotation =
+            window.scrollY * 0.35;
+
+
+        cd.style.transform = `
+
+            translate(
+                -50%,
+                -50%
+            )
+
+            rotate(
+                ${rotation}deg
+            )
+
+        `;
+
+    }
+);
+
+
+/* =========================================================
+   PHOTO GALLERIES
+========================================================= */
+
+const galleries = {
+
+
+    project1: {
+
+        title:
+            "Project One",
+
+        images: [
+
+            "images/project1-1.jpg",
+            "images/project1-2.jpg",
+            "images/project1-3.jpg",
+            "images/project1-4.jpg",
+            "images/project1-5.jpg",
+            "images/project1-6.jpg"
+
+        ]
+
+    },
+
+
+    project2: {
+
+        title:
+            "Project Two",
+
+        images: [
+
+            "images/project2-1.jpg",
+            "images/project2-2.jpg",
+            "images/project2-3.jpg",
+            "images/project2-4.jpg"
+
+        ]
+
+    },
+
+
+    project3: {
+
+        title:
+            "Project Three",
+
+        images: [
+
+            "images/project3-1.jpg",
+            "images/project3-2.jpg",
+            "images/project3-3.jpg",
+            "images/project3-4.jpg"
+
+        ]
+
+    },
+
+
+    project4: {
+
+        title:
+            "Project Four",
+
+        images: [
+
+            "images/project4-1.jpg",
+            "images/project4-2.jpg",
+            "images/project4-3.jpg",
+            "images/project4-4.jpg"
+
+        ]
+
+    },
+
+
+    project5: {
+
+        title:
+            "Project Five",
+
+        images: [
+
+            "images/project5-1.jpg",
+            "images/project5-2.jpg",
+            "images/project5-3.jpg",
+            "images/project5-4.jpg"
+
+        ]
+
+    }
+
+};
+
+
+/* =========================================================
+   OPEN PHOTO GALLERY
+========================================================= */
+
+function openGallery(project) {
+
+    const modal =
+        document.getElementById(
+            "galleryModal"
         );
 
 
-
-        /* ==================================================
-           PHOTOGRAPHY GALLERIES
-        ================================================== */
-
-        const galleries = {
-
-            project1: {
-
-                title:
-                    "Project One",
-
-                images: [
-
-                    "images/project1-1.jpg",
-                    "images/project1-2.jpg",
-                    "images/project1-3.jpg",
-                    "images/project1-4.jpg",
-                    "images/project1-5.jpg",
-                    "images/project1-6.jpg"
-
-                ]
-
-            },
+    const title =
+        document.getElementById(
+            "galleryTitle"
+        );
 
 
-            project2: {
-
-                title:
-                    "Project Two",
-
-                images: [
-
-                    "images/project2-1.jpg",
-                    "images/project2-2.jpg",
-                    "images/project2-3.jpg",
-                    "images/project2-4.jpg"
-
-                ]
-
-            },
+    const grid =
+        document.getElementById(
+            "galleryGrid"
+        );
 
 
-            project3: {
-
-                title:
-                    "Project Three",
-
-                images: [
-
-                    "images/project3-1.jpg",
-                    "images/project3-2.jpg",
-                    "images/project3-3.jpg",
-                    "images/project3-4.jpg"
-
-                ]
-
-            },
+    const gallery =
+        galleries[project];
 
 
-            project4: {
-
-                title:
-                    "Project Four",
-
-                images: [
-
-                    "images/project4-1.jpg",
-                    "images/project4-2.jpg",
-                    "images/project4-3.jpg",
-                    "images/project4-4.jpg"
-
-                ]
-
-            },
+    if (!gallery) {
+        return;
+    }
 
 
-            project5: {
-
-                title:
-                    "Project Five",
-
-                images: [
-
-                    "images/project5-1.jpg",
-                    "images/project5-2.jpg",
-                    "images/project5-3.jpg",
-                    "images/project5-4.jpg"
-
-                ]
-
-            }
-
-        };
+    title.textContent =
+        gallery.title;
 
 
+    grid.innerHTML =
+        "";
 
-        /* ==================================================
-           OPEN GALLERY
-        ================================================== */
 
-        function openGallery(project) {
+    gallery.images.forEach(
+        (image) => {
 
-            const modal =
-                document.getElementById(
-                    "galleryModal"
+            const img =
+                document.createElement(
+                    "img"
                 );
 
 
-            const title =
-                document.getElementById(
-                    "galleryTitle"
-                );
+            img.src =
+                image;
 
 
-            const grid =
-                document.getElementById(
-                    "galleryGrid"
-                );
-
-
-            const gallery =
-                galleries[project];
-
-
-            if (!gallery) {
-                return;
-            }
-
-
-            title.textContent =
+            img.alt =
                 gallery.title;
 
 
-            grid.innerHTML =
-                "";
-
-
-            gallery.images.forEach(
-                (image) => {
-
-                    const img =
-                        document.createElement(
-                            "img"
-                        );
-
-
-                    img.src =
-                        image;
-
-
-                    img.alt =
-                        gallery.title;
-
-
-                    grid.appendChild(
-                        img
-                    );
-
-                }
-            );
-
-
-            modal.classList.add(
-                "active"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            modal.scrollTop = 0;
-
-        }
-
-
-
-        /* ==================================================
-           CLOSE GALLERY
-        ================================================== */
-
-        function closeGallery() {
-
-            const modal =
-                document.getElementById(
-                    "galleryModal"
-                );
-
-
-            modal.classList.remove(
-                "active"
-            );
-
-
-            setTimeout(
-                () => {
-
-                    document.body.style.overflow =
-                        "";
-
-                },
-                350
+            grid.appendChild(
+                img
             );
 
         }
+    );
 
 
+    modal.classList.add(
+        "active"
+    );
 
-        /* ==================================================
-           ESCAPE TO CLOSE
-        ================================================== */
 
-        document.addEventListener(
-            "keydown",
-            (event) => {
+    document.body.style.overflow =
+        "hidden";
 
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
 
-                    closeGallery();
+    modal.scrollTop = 0;
 
-                }
+}
 
-            }
+
+/* =========================================================
+   CLOSE PHOTO GALLERY
+========================================================= */
+
+function closeGallery() {
+
+    const modal =
+        document.getElementById(
+            "galleryModal"
         );
 
 
+    modal.classList.remove(
+        "active"
+    );
 
-        /* ==================================================
-           CLICK BACKGROUND TO CLOSE
-        ================================================== */
 
-        document
-            .getElementById(
-                "galleryModal"
-            )
-            .addEventListener(
-                "click",
-                (event) => {
+    document.body.style.overflow =
+        "";
 
-                    if (
-                        event.target.id ===
-                        "galleryModal"
-                    ) {
+}
 
-                        closeGallery();
 
-                    }
+/* =========================================================
+   OPEN VIDEO
+========================================================= */
 
-                }
+const videoModal =
+    document.getElementById(
+        "videoModal"
+    );
+
+
+const popupVideo =
+    document.getElementById(
+        "popupVideo"
+    );
+
+
+function openVideo(
+    videoSource
+) {
+
+    popupVideo.src =
+        videoSource;
+
+
+    videoModal.classList.add(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    setTimeout(
+        () => {
+
+            popupVideo.play();
+
+        },
+        300
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE VIDEO
+========================================================= */
+
+function closeVideo() {
+
+    popupVideo.pause();
+
+    popupVideo.currentTime = 0;
+
+    popupVideo.removeAttribute(
+        "src"
+    );
+
+    popupVideo.load();
+
+
+    videoModal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE VIDEO
+========================================================= */
+
+videoModal.addEventListener(
+    "click",
+    (event) => {
+
+        if (
+            event.target ===
+            videoModal
+        ) {
+
+            closeVideo();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeGallery();
+
+            closeVideo();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   HIDE SCROLL TEXT
+========================================================= */
+
+const scrollIndicator =
+    document.querySelector(
+        ".scroll-indicator"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 20
+        ) {
+
+            scrollIndicator.classList.add(
+                "hidden"
             );
 
+        } else {
 
-
-        /* ==================================================
-           VIDEO HOVER PLAY
-        ================================================== */
-
-        const videos =
-            document.querySelectorAll(
-                ".video-project video"
+            scrollIndicator.classList.remove(
+                "hidden"
             );
 
+        }
 
-        videos.forEach(
-            (video) => {
+    }
+);
 
-                const container =
-                    video.closest(
-                        ".video-project"
-                    );
-
-
-                container.addEventListener(
-                    "mouseenter",
-                    () => {
-
-                        video.play();
-
-                    }
-                );
-
-
-                container.addEventListener(
-                    "mouseleave",
-                    () => {
-
-                        video.pause();
-
-                    }
-                );
-
-            }
-        );
-
-
-
-        /* ==================================================
-           HIDE SCROLL TEXT
-        ================================================== */
-
-        const scrollIndicator =
-            document.querySelector(
-                ".scroll-indicator"
-            );
-
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (
-                    window.scrollY > 20
-                ) {
-
-                    scrollIndicator.classList.add(
-                        "hidden"
-                    );
-
-                } else {
-
-                    scrollIndicator.classList.remove(
-                        "hidden"
-                    );
-
-                }
-
-            }
-        );
-
-
-    </script>
+</script>
 
 
 </body>
