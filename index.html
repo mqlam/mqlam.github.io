@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>mqlam</title>
 
     <style>
+
+        /* =========================
+           GENERAL PAGE
+        ========================= */
+
         * {
             box-sizing: border-box;
         }
@@ -16,13 +22,19 @@
             height: 100vh;
             overflow: hidden;
 
+            background: white;
+
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: white;
             font-family: Arial, Helvetica, sans-serif;
         }
+
+
+        /* =========================
+           MAIN LOGO
+        ========================= */
 
         .scene {
             perspective: 900px;
@@ -30,6 +42,7 @@
 
         .logo {
             position: relative;
+
             display: inline-block;
 
             font-size: clamp(80px, 14vw, 220px);
@@ -39,32 +52,32 @@
 
             color: white;
 
+            -webkit-text-stroke: 5px black;
+
             transform-style: preserve-3d;
-            transition: transform 0.15s ease-out;
 
             cursor: pointer;
 
-            /* Comic-style black outline */
-            -webkit-text-stroke: 5px black;
+            transition: transform 0.15s ease-out;
 
-            /* Makes the text feel heavier */
             paint-order: stroke fill;
         }
 
-        /*
-            Spiked comic outline
-            --------------------
-            The pseudo-element creates a jagged shape
-            behind the text using a clip-path.
-        */
+
+        /* =========================
+           COMIC SPIKED OUTLINE
+        ========================= */
+
         .logo::before {
             content: "";
+
             position: absolute;
 
             z-index: -1;
 
             left: -7%;
             top: -15%;
+
             width: 114%;
             height: 130%;
 
@@ -116,75 +129,230 @@
             transform: translateZ(-10px);
         }
 
-        /* Small offset shadow for a comic-print feel */
+
+        /* =========================
+           COMIC WHITE OFFSET
+        ========================= */
+
         .logo::after {
             content: "mqlam";
 
             position: absolute;
+
             inset: 0;
 
             color: transparent;
+
             -webkit-text-stroke: 3px white;
 
-            transform: translate(5px, 5px) translateZ(-5px);
+            transform:
+                translate(5px, 5px)
+                translateZ(-5px);
 
             z-index: -1;
         }
 
-        .logo:hover {
-            transition: transform 0.05s ease-out;
-        }
 
-        .photo {
+        /* =========================
+           IMAGE CONTAINER
+        ========================= */
+
+        .image-container {
             position: fixed;
+
             left: 30px;
             bottom: 30px;
-            width: 250px;
 
-            transform: rotate(-5deg);
-            box-shadow: 8px 8px 0 black;
+            width: 500px;
+            height: 300px;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        .photo {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 200px;
+            height: auto;
+
+            z-index: 2;
+
+            object-fit: cover;
+        }
+
+
+        /* =========================
+           WAVY LINES
+        ========================= */
+
+        .wavy-lines {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 500px;
+            height: 300px;
+
+            z-index: 1;
+
+            fill: none;
+
+            stroke: black;
+
+            stroke-width: 3;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
         }
 
     </style>
 </head>
 
+
 <body>
 
+
+    <!-- =========================
+         CENTER LOGO
+    ========================= -->
+
     <div class="scene">
-        <div class="logo" id="logo">mqlam</div>
+
+        <div class="logo" id="logo">
+            mqlam
+        </div>
+
     </div>
 
-    <img src="images/piano.jpg" class="photo">
+
+
+    <!-- =========================
+         BOTTOM LEFT IMAGE + LINES
+    ========================= -->
+
+    <div class="image-container">
+
+
+        <!-- WAVY LINES -->
+
+        <svg
+            class="wavy-lines"
+            viewBox="0 0 500 300"
+            preserveAspectRatio="none"
+        >
+
+            <path
+                d="M80 220
+                   C150 180, 130 100, 230 80
+                   S350 80, 470 20"
+            />
+
+            <path
+                d="M80 230
+                   C160 200, 150 130, 250 110
+                   S370 100, 480 60"
+            />
+
+            <path
+                d="M80 240
+                   C160 220, 180 170, 270 150
+                   S380 150, 480 110"
+            />
+
+            <path
+                d="M80 250
+                   C170 250, 190 210, 280 190
+                   S390 190, 480 160"
+            />
+
+        </svg>
+
+
+        <!-- YOUR IMAGE -->
+
+        <img
+            src="images/photo1.jpg"
+            class="photo"
+            alt="Photo"
+        >
+
+    </div>
+
+
+
+    <!-- =========================
+         3D LOGO HOVER
+    ========================= -->
 
     <script>
+
         const logo = document.getElementById("logo");
 
+
         logo.addEventListener("mousemove", (event) => {
+
             const rect = logo.getBoundingClientRect();
 
-            // Mouse position relative to the center
-            const x = event.clientX - (rect.left + rect.width / 2);
-            const y = event.clientY - (rect.top + rect.height / 2);
 
-            // Convert position into rotation
-            const rotateY = (x / rect.width) * 25;
-            const rotateX = -(y / rect.height) * 25;
+            // Find mouse position relative
+            // to the center of the logo
+
+            const x =
+                event.clientX -
+                (rect.left + rect.width / 2);
+
+            const y =
+                event.clientY -
+                (rect.top + rect.height / 2);
+
+
+            // Convert mouse position
+            // into rotation
+
+            const rotateY =
+                (x / rect.width) * 25;
+
+            const rotateX =
+                -(y / rect.height) * 25;
+
+
+            // Apply 3D rotation
 
             logo.style.transform = `
                 rotateX(${rotateX}deg)
                 rotateY(${rotateY}deg)
                 scale(1.04)
             `;
+
         });
 
+
+        // Return logo to normal
+        // when mouse leaves
+
         logo.addEventListener("mouseleave", () => {
+
             logo.style.transform = `
                 rotateX(0deg)
                 rotateY(0deg)
                 scale(1)
             `;
+
         });
+
     </script>
+
 
 </body>
 </html>
+
