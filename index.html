@@ -6,6 +6,12 @@
 
     <title>mqlam</title>
 
+    <!-- Instagram icon library -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
     <style>
 
         /* =========================
@@ -154,65 +160,70 @@
 
 
         /* =========================
-           IMAGE CONTAINER
+           INSTAGRAM BUTTON
         ========================= */
 
-        .image-container {
+        .instagram-button {
             position: fixed;
 
-            left: 30px;
-            bottom: 30px;
+            bottom: 35px;
+            left: 50%;
 
-            width: 500px;
-            height: 300px;
+            transform: translateX(-50%);
 
-            pointer-events: none;
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: white;
+
+            color: black;
+
+            border: 2px solid black;
+            border-radius: 50%;
+
+            text-decoration: none;
+
+            font-size: 21px;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                color 0.2s ease;
+
+            z-index: 10;
+        }
+
+
+        /* Hover effect */
+
+        .instagram-button:hover {
+            transform:
+                translateX(-50%)
+                scale(1.12);
+
+            background: black;
+            color: white;
         }
 
 
         /* =========================
-           IMAGE
+           MOBILE
         ========================= */
 
-        .photo {
-            position: absolute;
+        @media (max-width: 600px) {
 
-            left: 0;
-            bottom: 0;
+            .logo {
+                font-size: 22vw;
+            }
 
-            width: 200px;
-            height: auto;
+            .instagram-button {
+                bottom: 25px;
+            }
 
-            z-index: 2;
-
-            object-fit: cover;
-        }
-
-
-        /* =========================
-           WAVY LINES
-        ========================= */
-
-        .wavy-lines {
-            position: absolute;
-
-            left: 0;
-            bottom: 0;
-
-            width: 500px;
-            height: 300px;
-
-            z-index: 1;
-
-            fill: none;
-
-            stroke: black;
-
-            stroke-width: 3;
-
-            stroke-linecap: round;
-
-            stroke-linejoin: round;
         }
 
     </style>
@@ -235,59 +246,19 @@
     </div>
 
 
-
     <!-- =========================
-         BOTTOM LEFT IMAGE + LINES
+         INSTAGRAM BUTTON
     ========================= -->
 
-    <div class="image-container">
-
-
-        <!-- WAVY LINES -->
-
-        <svg
-            class="wavy-lines"
-            viewBox="0 0 500 300"
-            preserveAspectRatio="none"
-        >
-
-            <path
-                d="M80 220
-                   C150 180, 130 100, 230 80
-                   S350 80, 470 20"
-            />
-
-            <path
-                d="M80 230
-                   C160 200, 150 130, 250 110
-                   S370 100, 480 60"
-            />
-
-            <path
-                d="M80 240
-                   C160 220, 180 170, 270 150
-                   S380 150, 480 110"
-            />
-
-            <path
-                d="M80 250
-                   C170 250, 190 210, 280 190
-                   S390 190, 480 160"
-            />
-
-        </svg>
-
-
-        <!-- YOUR IMAGE -->
-
-        <img
-            src="images/photo1.jpg"
-            class="photo"
-            alt="Photo"
-        >
-
-    </div>
-
+    <a
+        href="https://www.instagram.com/YOUR_USERNAME/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram-button"
+        aria-label="Instagram"
+    >
+        <i class="fa-brands fa-instagram"></i>
+    </a>
 
 
     <!-- =========================
@@ -304,9 +275,6 @@
             const rect = logo.getBoundingClientRect();
 
 
-            // Find mouse position relative
-            // to the center of the logo
-
             const x =
                 event.clientX -
                 (rect.left + rect.width / 2);
@@ -316,17 +284,12 @@
                 (rect.top + rect.height / 2);
 
 
-            // Convert mouse position
-            // into rotation
-
             const rotateY =
                 (x / rect.width) * 25;
 
             const rotateX =
                 -(y / rect.height) * 25;
 
-
-            // Apply 3D rotation
 
             logo.style.transform = `
                 rotateX(${rotateX}deg)
@@ -336,9 +299,6 @@
 
         });
 
-
-        // Return logo to normal
-        // when mouse leaves
 
         logo.addEventListener("mouseleave", () => {
 
@@ -355,4 +315,3 @@
 
 </body>
 </html>
-
