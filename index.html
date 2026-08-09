@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,6 +134,17 @@
         .logo:hover {
             transition: transform 0.05s ease-out;
         }
+
+        .photo {
+            position: fixed;
+            left: 30px;
+            bottom: 30px;
+            width: 250px;
+
+            transform: rotate(-5deg);
+            box-shadow: 8px 8px 0 black;
+        }
+
     </style>
 </head>
 
@@ -143,6 +153,8 @@
     <div class="scene">
         <div class="logo" id="logo">mqlam</div>
     </div>
+
+    <img src="images/piano.jpg" class="photo">
 
     <script>
         const logo = document.getElementById("logo");
@@ -176,4 +188,3 @@
 
 </body>
 </html>
-```
