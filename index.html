@@ -177,10 +177,6 @@
             color: white;
         }
 
-        .photo-tab.active:hover {
-            background: #333;
-        }
-
         /* COLLECTION PAGES */
 
         .photo-page {
@@ -237,6 +233,119 @@
 
         .photo-item:hover img {
             transform: scale(1.04);
+        }
+
+        /* AWARDS CLICKABLE PHOTOS */
+
+        .award-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .award-card::after {
+            content: "VIEW AWARD ↗";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 13px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .award-card:hover::after {
+            opacity: 1;
+        }
+
+        /* AWARD DETAIL VIEW */
+
+        .award-detail {
+            display: none;
+            width: 100%;
+            animation: pageFade 0.3s ease;
+        }
+
+        .award-detail.active {
+            display: block;
+        }
+
+        .award-back {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 11px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            padding: 10px 0;
+        }
+
+        .award-back:hover {
+            text-decoration: underline;
+        }
+
+        .award-detail-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .award-large-image {
+            width: 100%;
+            background: #f2f2f2;
+        }
+
+        .award-large-image img {
+            width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .award-information {
+            align-self: center;
+        }
+
+        .award-number {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .award-information h3 {
+            font-size: clamp(35px, 5vw, 65px);
+            line-height: 0.95;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .award-divider {
+            width: 50px;
+            height: 2px;
+            background: black;
+            margin-bottom: 25px;
+        }
+
+        .award-description {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .award-recognition {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.8;
         }
 
         /* VIDEOGRAPHY */
@@ -393,6 +502,7 @@
         /* MOBILE */
 
         @media (max-width: 700px) {
+
             .hero {
                 min-height: 500px;
             }
@@ -431,6 +541,23 @@
             .photo-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 10px;
+            }
+
+            .award-detail-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .award-large-image img {
+                max-height: 55vh;
+            }
+
+            .award-information h3 {
+                font-size: 42px;
+            }
+
+            .award-information {
+                padding-bottom: 25px;
             }
 
             .video-grid {
@@ -507,23 +634,20 @@
 
             <!-- COLLECTION BUTTONS -->
 
-            <div class="photo-navigation">
+            <div class="photo-navigation" id="photoNavigation">
 
-                <button
-                    class="photo-tab active"
-                    onclick="showCollection('creative', this)">
+                <button class="photo-tab active"
+                        onclick="showCollection('creative', this)">
                     Creative
                 </button>
 
-                <button
-                    class="photo-tab"
-                    onclick="showCollection('client', this)">
+                <button class="photo-tab"
+                        onclick="showCollection('client', this)">
                     Client
                 </button>
 
-                <button
-                    class="photo-tab"
-                    onclick="showCollection('awards', this)">
+                <button class="photo-tab"
+                        onclick="showCollection('awards', this)">
                     Awards
                 </button>
 
@@ -531,13 +655,10 @@
 
 
             <!-- CREATIVE COLLECTION -->
-            <!-- This collection is selected by default -->
 
             <div class="photo-page active" id="creative">
 
-                <div class="collection-title">
-                    Creative
-                </div>
+                <div class="collection-title">Creative</div>
 
                 <div class="photo-grid">
 
@@ -574,9 +695,7 @@
 
             <div class="photo-page" id="client">
 
-                <div class="collection-title">
-                    Client
-                </div>
+                <div class="collection-title">Client</div>
 
                 <div class="photo-grid">
 
@@ -613,34 +732,138 @@
 
             <div class="photo-page" id="awards">
 
-                <div class="collection-title">
-                    Awards
-                </div>
+                <div class="collection-title">Awards</div>
 
                 <div class="photo-grid">
 
-                    <div class="photo-item">
-                        <img src="images/awards1.jpg" alt="Awards photography 1">
+                    <!-- AWARD 1 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards1.jpg',
+                            'Award Title One',
+                            'Write a description of this award here. Explain what the recognition was for, the project involved, and any other details you want visitors to know.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards1.jpg" alt="Award 1">
+
                     </div>
 
-                    <div class="photo-item">
-                        <img src="images/awards2.jpg" alt="Awards photography 2">
+
+                    <!-- AWARD 2 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards2.jpg',
+                            'Award Title Two',
+                            'Write a description of this award here. Explain the work you submitted and why it received recognition.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards2.jpg" alt="Award 2">
+
                     </div>
 
-                    <div class="photo-item">
-                        <img src="images/awards3.jpg" alt="Awards photography 3">
+
+                    <!-- AWARD 3 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards3.jpg',
+                            'Award Title Three',
+                            'Write a description of this award here. Include the competition, category, and any details about your achievement.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards3.jpg" alt="Award 3">
+
                     </div>
 
-                    <div class="photo-item">
-                        <img src="images/awards4.jpg" alt="Awards photography 4">
+
+                    <!-- AWARD 4 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards4.jpg',
+                            'Award Title Four',
+                            'Write a description of this award here.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards4.jpg" alt="Award 4">
+
                     </div>
 
-                    <div class="photo-item">
-                        <img src="images/awards5.jpg" alt="Awards photography 5">
+
+                    <!-- AWARD 5 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards5.jpg',
+                            'Award Title Five',
+                            'Write a description of this award here.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards5.jpg" alt="Award 5">
+
                     </div>
 
-                    <div class="photo-item">
-                        <img src="images/awards6.jpg" alt="Awards photography 6">
+
+                    <!-- AWARD 6 -->
+
+                    <div class="photo-item award-card"
+                         onclick="openAward(
+                            'images/awards6.jpg',
+                            'Award Title Six',
+                            'Write a description of this award here.',
+                            'Award Organization · Year'
+                         )">
+
+                        <img src="images/awards6.jpg" alt="Award 6">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AWARD DETAIL VIEW -->
+
+            <div class="award-detail" id="awardDetail">
+
+                <button class="award-back" onclick="closeAward()">
+                    ← BACK TO AWARDS
+                </button>
+
+                <div class="award-detail-layout">
+
+                    <div class="award-large-image">
+                        <img id="awardDetailImage" src="" alt="Award detail">
+                    </div>
+
+                    <div class="award-information">
+
+                        <div class="award-number">
+                            RECOGNITION / AWARD
+                        </div>
+
+                        <h3 id="awardDetailTitle">
+                            Award Title
+                        </h3>
+
+                        <div class="award-divider"></div>
+
+                        <p class="award-description" id="awardDetailDescription">
+                            Award description goes here.
+                        </p>
+
+                        <div class="award-recognition" id="awardDetailRecognition">
+                            Organization · Year
+                        </div>
+
                     </div>
 
                 </div>
@@ -674,7 +897,6 @@
 
                 </div>
 
-
                 <div class="video-card"
                      onclick="openVideo('videos/video2.mp4')">
 
@@ -688,7 +910,6 @@
 
                 </div>
 
-
                 <div class="video-card"
                      onclick="openVideo('videos/video3.mp4')">
 
@@ -701,7 +922,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="video-card"
                      onclick="openVideo('videos/video4.mp4')">
@@ -795,21 +1015,59 @@
 
         function showCollection(collection, button) {
 
-            // Hide every collection
             document.querySelectorAll(".photo-page").forEach(page => {
                 page.classList.remove("active");
             });
 
-            // Remove active styling from every button
             document.querySelectorAll(".photo-tab").forEach(tab => {
                 tab.classList.remove("active");
             });
 
-            // Show selected collection
             document.getElementById(collection).classList.add("active");
 
-            // Highlight selected button
             button.classList.add("active");
+
+            // Make sure the award detail view is closed
+            document.getElementById("awardDetail").classList.remove("active");
+
+        }
+
+
+        /* AWARD DETAIL VIEW */
+
+        function openAward(image, title, description, recognition) {
+
+            document.getElementById("awards").classList.remove("active");
+
+            const detail = document.getElementById("awardDetail");
+
+            document.getElementById("awardDetailImage").src = image;
+            document.getElementById("awardDetailTitle").textContent = title;
+            document.getElementById("awardDetailDescription").textContent = description;
+            document.getElementById("awardDetailRecognition").textContent = recognition;
+
+            detail.classList.add("active");
+
+            detail.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        /* CLOSE AWARD DETAIL */
+
+        function closeAward() {
+
+            document.getElementById("awardDetail").classList.remove("active");
+
+            document.getElementById("awards").classList.add("active");
+
+            document.getElementById("awards").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
 
         }
 
@@ -893,7 +1151,7 @@
             popupVideo.load();
 
             popupVideo.play().catch(() => {
-                // The user can press play if the browser blocks autoplay.
+                // The user can press play if autoplay is blocked.
             });
 
         }
@@ -920,6 +1178,7 @@
 
             if (event.key === "Escape") {
                 closeVideo();
+                closeAward();
             }
 
         });
