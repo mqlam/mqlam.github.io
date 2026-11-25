@@ -1,2814 +1,709 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>mqlam</title>
-
-
-<!-- =========================================================
-     FONT AWESOME
-========================================================= -->
-
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
->
-
-
-<style>
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-
-    background: white;
-
-    color: black;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    width: 100%;
-
-    height: 100vh;
-
-    min-height: 600px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-/* =========================================================
-   CD
-========================================================= */
-
-.cd {
-
-    position: absolute;
-
-    width:
-        min(65vw, 700px);
-
-    height:
-        min(65vw, 700px);
-
-    left: 50%;
-
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(0deg);
-
-    object-fit: contain;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    user-select: none;
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.scene {
-
-    perspective:
-        900px;
-
-    position: relative;
-
-    z-index: 5;
-}
-
-
-.logo {
-
-    position: relative;
-
-    display: inline-block;
-
-    font-size:
-        clamp(
-            80px,
-            14vw,
-            220px
-        );
-
-    font-weight: 900;
-
-    letter-spacing:
-        -0.08em;
-
-    line-height: 1;
-
-    color: white;
-
-    -webkit-text-stroke:
-        5px black;
-
-    transform-style:
-        preserve-3d;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease-out;
-
-    paint-order:
-        stroke fill;
-
-    z-index: 5;
-}
-
-
-/* =========================================================
-   COMIC SPIKES
-========================================================= */
-
-.logo::before {
-
-    content: "";
-
-    position: absolute;
-
-    z-index: -1;
-
-    left: -7%;
-
-    top: -15%;
-
-    width: 114%;
-
-    height: 130%;
-
-    background: black;
-
-    clip-path: polygon(
-
-        0% 38%,
-        7% 35%,
-        2% 24%,
-        13% 27%,
-        10% 14%,
-        22% 20%,
-        20% 7%,
-        31% 16%,
-        34% 2%,
-        42% 14%,
-        50% 0%,
-        56% 14%,
-        67% 4%,
-        67% 17%,
-        80% 9%,
-        77% 22%,
-        92% 18%,
-        86% 31%,
-        100% 30%,
-        91% 40%,
-        100% 50%,
-        91% 57%,
-        99% 68%,
-        86% 67%,
-        91% 81%,
-        78% 76%,
-        80% 91%,
-        67% 83%,
-        64% 100%,
-        54% 87%,
-        45% 98%,
-        40% 85%,
-        28% 95%,
-        30% 81%,
-        17% 88%,
-        20% 74%,
-        6% 77%,
-        12% 64%,
-        0% 62%,
-        9% 51%
-
-    );
-
-    transform:
-        translateZ(-10px);
-}
-
-
-/* =========================================================
-   INSTAGRAM BUTTON
-========================================================= */
-
-.instagram-button {
-
-    position: absolute;
-
-    bottom: 35px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 45px;
-
-    height: 45px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: white;
-
-    color: black;
-
-    border:
-        2px solid black;
-
-    border-radius: 50%;
-
-    text-decoration: none;
-
-    font-size: 21px;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease;
-
-    z-index: 10;
-}
-
-
-.instagram-button:hover {
-
-    transform:
-        translateX(-50%)
-        scale(1.12);
-
-    background: black;
-
-    color: white;
-}
-
-
-/* =========================================================
-   SCROLL INDICATOR
-========================================================= */
-
-.scroll-indicator {
-
-    position: absolute;
-
-    bottom: 30px;
-
-    left: 30px;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-
-    z-index: 10;
-}
-
-
-.scroll-indicator.hidden {
-
-    opacity: 0;
-
-    transform:
-        translateY(10px);
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   WORK SECTIONS
-========================================================= */
-
-.work-section {
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    padding:
-        100px 6vw;
-}
-
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-.section-header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        baseline;
-
-    margin-bottom: 60px;
-
-    border-bottom:
-        2px solid black;
-
-    padding-bottom: 15px;
-}
-
-
-.section-title {
-
-    margin: 0;
-
-    font-size:
-        clamp(
-            40px,
-            6vw,
-            90px
-        );
-
-    font-weight: 900;
-
-    letter-spacing:
-        -0.06em;
-}
-
-
-.section-number {
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================================================
-   PHOTOGRAPHY
-========================================================= */
-
-.photography {
-
-    background: white;
-
-    color: black;
-}
-
-
-/* =========================================================
-   PHOTO GRID
-========================================================= */
-
-.photo-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 25px;
-
-    align-items: start;
-}
-
-
-/* =========================================================
-   PHOTO PROJECT
-========================================================= */
-
-.photo-project {
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        #eeeeee;
-
-    cursor: pointer;
-
-    /*
-       IMPORTANT:
-
-       There is NO aspect-ratio here.
-
-       The image determines
-       the height of the card.
-    */
-
-    aspect-ratio: auto;
-}
-
-
-/* =========================================================
-   LARGE PHOTO PROJECT
-========================================================= */
-
-.photo-project.large {
-
-    grid-column:
-        span 2;
-
-    /*
-       The image determines
-       its own height.
-    */
-
-    aspect-ratio: auto;
-}
-
-
-/* =========================================================
-   PHOTO IMAGE
-========================================================= */
-
-.photo-project img {
-
-    width: 100%;
-
-    height: auto;
-
-    display: block;
-
-    object-fit: contain;
-
-    transition:
-        transform 0.5s ease;
-}
-
-
-.photo-project:hover img {
-
-    transform:
-        scale(1.05);
-}
-
-
-/* =========================================================
-   PHOTO PROJECT INFO
-========================================================= */
-
-.project-info {
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 100%;
-
-    padding: 25px;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0,0,0,0.85)
-        );
-
-    opacity: 0;
-
-    transform:
-        translateY(10px);
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-.photo-project:hover
-.project-info {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-.project-name {
-
-    font-size: 24px;
-
-    font-weight: 800;
-
-    margin-bottom: 5px;
-}
-
-
-.project-type {
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-}
-
-
-/* =========================================================
-   VIDEOGRAPHY
-========================================================= */
-
-.videography {
-
-    background: black;
-
-    color: white;
-}
-
-
-.videography
-.section-header {
-
-    border-bottom-color:
-        white;
-}
-
-
-/* =========================================================
-   VIDEO GRID
-========================================================= */
-
-.video-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 25px;
-}
-
-
-.video-project {
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        #151515;
-
-    aspect-ratio:
-        16 / 9;
-
-    cursor: pointer;
-}
-
-
-.video-project.large {
-
-    grid-column:
-        span 2;
-
-    aspect-ratio:
-        21 / 9;
-}
-
-
-/* =========================================================
-   VIDEO THUMBNAILS
-========================================================= */
-
-.video-project video {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   VIDEO PLAY BUTTON
-========================================================= */
-
-.play-button {
-
-    position: absolute;
-
-    top: 50%;
-
-    left: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: 65px;
-
-    height: 65px;
-
-    border:
-        2px solid white;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-size: 20px;
-
-    background:
-        rgba(0,0,0,0.25);
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
-}
-
-
-.video-project:hover
-.play-button {
-
-    transform:
-        translate(-50%, -50%)
-        scale(1.12);
-
-    background:
-        rgba(255,255,255,0.15);
-}
-
-
-/* =========================================================
-   VIDEO MODAL
-========================================================= */
-
-.video-modal {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background:
-        rgba(0,0,0,0.94);
-
-    z-index: 2000;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 50px;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.35s ease,
-        visibility 0.35s ease;
-}
-
-
-.video-modal.active {
-
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-/* =========================================================
-   VIDEO MODAL CONTENT
-========================================================= */
-
-.video-modal-content {
-
-    position: relative;
-
-    width: auto;
-
-    height: auto;
-
-    max-width: 90vw;
-
-    max-height: 85vh;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    transform:
-        scale(0.92);
-
-    opacity: 0;
-
-    transition:
-        transform 0.45s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        ),
-
-        opacity 0.35s ease;
-}
-
-
-.video-modal.active
-.video-modal-content {
-
-    transform:
-        scale(1);
-
-    opacity: 1;
-}
-
-
-/* =========================================================
-   POPUP VIDEO
-========================================================= */
-
-.video-modal video {
-
-    display: block;
-
-    width: auto;
-
-    height: auto;
-
-    max-width: 90vw;
-
-    max-height: 85vh;
-
-    object-fit: contain;
-
-    background: black;
-}
-
-
-/* =========================================================
-   VIDEO CLOSE
-========================================================= */
-
-.video-close {
-
-    position: absolute;
-
-    right: -60px;
-
-    top: -60px;
-
-    width: 50px;
-
-    height: 50px;
-
-    border:
-        2px solid white;
-
-    border-radius: 50%;
-
-    background:
-        transparent;
-
-    color: white;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-
-    z-index: 10;
-}
-
-
-.video-close:hover {
-
-    background: white;
-
-    color: black;
-
-    transform:
-        rotate(90deg);
-}
-
-
-/* =========================================================
-   PHOTO GALLERY MODAL
-========================================================= */
-
-.gallery-modal {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background:
-        rgba(0,0,0,0.94);
-
-    z-index: 1000;
-
-    display: flex;
-
-    flex-direction: column;
-
-    overflow-y: auto;
-
-    padding:
-        60px 5vw;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity 0.35s ease,
-        visibility 0.35s ease;
-}
-
-
-.gallery-modal.active {
-
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-/* =========================================================
-   GALLERY ANIMATION
-========================================================= */
-
-.gallery-modal
-.gallery-header,
-
-.gallery-modal
-.gallery-grid {
-
-    opacity: 0;
-
-    transform:
-        translateY(30px)
-        scale(0.97);
-
-    transition:
-        opacity 0.45s ease,
-        transform 0.45s
-        cubic-bezier(
-            0.16,
-            1,
-            0.3,
-            1
-        );
-}
-
-
-.gallery-modal.active
-.gallery-header,
-
-.gallery-modal.active
-.gallery-grid {
-
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-.gallery-modal.active
-.gallery-grid {
-
-    transition-delay:
-        0.08s;
-}
-
-
-/* =========================================================
-   GALLERY HEADER
-========================================================= */
-
-.gallery-header {
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    margin-bottom: 40px;
-
-    color: white;
-}
-
-
-.gallery-title {
-
-    margin: 0;
-
-    font-size:
-        clamp(
-            30px,
-            5vw,
-            65px
-        );
-
-    font-weight: 900;
-
-    letter-spacing:
-        -0.05em;
-}
-
-
-/* =========================================================
-   GALLERY CLOSE
-========================================================= */
-
-.gallery-close {
-
-    width: 50px;
-
-    height: 50px;
-
-    border:
-        2px solid white;
-
-    border-radius: 50%;
-
-    background:
-        transparent;
-
-    color: white;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.gallery-close:hover {
-
-    background: white;
-
-    color: black;
-
-    transform:
-        rotate(90deg);
-}
-
-
-/* =========================================================
-   GALLERY GRID
-========================================================= */
-
-.gallery-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
-    max-width:
-        1400px;
-
-    width: 100%;
-
-    margin:
-        0 auto;
-}
-
-
-.gallery-grid img {
-
-    width: 100%;
-
-    height: auto;
-
-    display: block;
-
-    object-fit: contain;
-}
-
-
-.gallery-grid img:first-child {
-
-    grid-column:
-        span 2;
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact-section {
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    padding:
-        100px 6vw;
-
-    background: white;
-
-    color: black;
-}
-
-
-/* =========================================================
-   CONTACT HEADER
-========================================================= */
-
-.contact-header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        baseline;
-
-    margin-bottom: 80px;
-
-    border-bottom:
-        2px solid black;
-
-    padding-bottom: 15px;
-}
-
-
-.contact-title {
-
-    margin: 0;
-
-    font-size:
-        clamp(
-            40px,
-            6vw,
-            90px
-        );
-
-    font-weight: 900;
-
-    letter-spacing:
-        -0.06em;
-}
-
-
-.contact-number {
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================================================
-   CONTACT CONTAINER
-========================================================= */
-
-.contact-container {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 10vw;
-
-    max-width:
-        1400px;
-
-    margin:
-        0 auto;
-}
-
-
-/* =========================================================
-   CONTACT LEFT
-========================================================= */
-
-.contact-big {
-
-    margin: 0;
-
-    font-size:
-        clamp(
-            50px,
-            7vw,
-            110px
-        );
-
-    line-height:
-        0.85;
-
-    font-weight: 900;
-
-    letter-spacing:
-        -0.07em;
-}
-
-
-.contact-description {
-
-    max-width:
-        450px;
-
-    margin-top: 50px;
-
-    font-size: 17px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   CONTACT DETAILS
-========================================================= */
-
-.contact-details {
-
-    margin-top: 60px;
-
-    display: flex;
-
-    flex-direction:
-        column;
-
-    gap: 30px;
-}
-
-
-.contact-details div {
-
-    display: flex;
-
-    flex-direction:
-        column;
-
-    gap: 8px;
-}
-
-
-.contact-details span {
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-
-.contact-details a {
-
-    color: black;
-
-    text-decoration: none;
-
-    font-size: 17px;
-
-    width: fit-content;
-
-    border-bottom:
-        1px solid black;
-
-    padding-bottom: 3px;
-
-    transition:
-        opacity 0.2s ease;
-}
-
-
-.contact-details a:hover {
-
-    opacity: 0.5;
-}
-
-
-/* =========================================================
-   CONTACT FORM
-========================================================= */
-
-.contact-form {
-
-    width: 100%;
-
-    display: flex;
-
-    flex-direction:
-        column;
-
-    gap: 30px;
-}
-
-
-.form-group {
-
-    display: flex;
-
-    flex-direction:
-        column;
-
-    gap: 10px;
-}
-
-
-.form-group label {
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-}
-
-
-.form-group input,
-.form-group textarea {
-
-    width: 100%;
-
-    border: none;
-
-    border-bottom:
-        2px solid black;
-
-    border-radius: 0;
-
-    background:
-        transparent;
-
-    padding:
-        12px 0;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 17px;
-
-    color: black;
-
-    outline: none;
-
-    resize: vertical;
-
-    transition:
-        border-bottom 0.2s ease;
-}
-
-
-.form-group input:focus,
-.form-group textarea:focus {
-
-    border-bottom:
-        4px solid black;
-}
-
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-
-    color: #999;
-}
-
-
-/* =========================================================
-   CONTACT BUTTON
-========================================================= */
-
-.contact-submit {
-
-    margin-top: 10px;
-
-    width: 100%;
-
-    padding:
-        22px 25px;
-
-    border:
-        2px solid black;
-
-    background: black;
-
-    color: white;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    cursor: pointer;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    transition:
-        background 0.25s ease,
-        color 0.25s ease;
-}
-
-
-.contact-submit span {
-
-    font-size: 25px;
-
-    line-height: 0;
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-.contact-submit:hover {
-
-    background: white;
-
-    color: black;
-}
-
-
-.contact-submit:hover span {
-
-    transform:
-        translateX(8px);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    padding:
-        50px 6vw;
-
-    background: black;
-
-    color: white;
-
-    border-top:
-        2px solid white;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-
-    .work-section {
-
-        padding:
-            70px 20px;
-    }
-
-
-    /* PHOTO GRID */
-
-    .photo-grid {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 20px;
-    }
-
-
-    /*
-       IMPORTANT:
-
-       Large photos no longer
-       have a forced 4:3 ratio.
-    */
-
-    .photo-project.large {
-
-        grid-column:
-            span 1;
-
-        aspect-ratio:
-            auto;
-    }
-
-
-    .photo-project {
-
-        aspect-ratio:
-            auto;
-    }
-
-
-    .photo-project img {
-
-        width: 100%;
-
-        height: auto;
-    }
-
-
-    /* VIDEO GRID */
-
-    .video-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .video-project.large {
-
-        grid-column:
-            span 1;
-
-        aspect-ratio:
-            16 / 9;
-    }
-
-
-    /* GALLERY */
-
-    .gallery-modal {
-
-        padding:
-            30px 20px;
-    }
-
-
-    .gallery-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .gallery-grid img:first-child {
-
-        grid-column:
-            span 1;
-    }
-
-
-    /* HERO */
-
-    .cd {
-
-        width: 90vw;
-
-        height: 90vw;
-    }
-
-
-    .scroll-indicator {
-
-        display: none;
-    }
-
-
-    /* VIDEO MODAL */
-
-    .video-modal {
-
-        padding:
-            20px;
-    }
-
-
-    .video-modal video {
-
-        max-width:
-            95vw;
-
-        max-height:
-            80vh;
-    }
-
-
-    .video-close {
-
-        right: 0;
-
-        top: -60px;
-    }
-
-
-    /* CONTACT */
-
-    .contact-section {
-
-        padding:
-            70px 20px;
-    }
-
-
-    .contact-header {
-
-        margin-bottom:
-            50px;
-    }
-
-
-    .contact-container {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 70px;
-    }
-
-
-    .contact-big {
-
-        font-size:
-            clamp(
-                55px,
-                17vw,
-                100px
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mqlam — Portfolio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: white;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cd {
+            position: absolute;
+            width: min(75vw, 650px);
+            height: auto;
+            z-index: 1;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(75px, 15vw, 190px);
+            font-weight: 900;
+            letter-spacing: -12px;
+            transform-style: preserve-3d;
+            transition: transform 0.12s ease-out;
+            will-change: transform;
+            cursor: default;
+            user-select: none;
+        }
+
+        .logo::before {
+            content: "";
+            position: absolute;
+            inset: -15px -25px;
+            background: white;
+            z-index: -1;
+            clip-path: polygon(
+                50% 0%, 57% 12%, 69% 3%, 73% 17%,
+                88% 11%, 86% 27%, 100% 35%, 88% 47%,
+                98% 60%, 83% 66%, 91% 83%, 73% 82%,
+                66% 100%, 53% 88%, 41% 100%, 34% 84%,
+                16% 91%, 19% 73%, 0% 66%, 13% 52%,
+                0% 39%, 16% 31%, 10% 14%, 30% 18%,
+                37% 2%
             );
-    }
+        }
 
+        .instagram {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            font-size: 25px;
+            color: black;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
 
-    .contact-description {
+        .instagram:hover {
+            transform: translateX(-50%) scale(1.15);
+        }
 
-        margin-top:
-            35px;
-    }
+        .scroll-prompt {
+            position: absolute;
+            bottom: 45px;
+            right: 45px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
 
+        .scroll-prompt.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    .contact-details {
+        /* WORK SECTION */
 
-        margin-top:
-            40px;
-    }
+        .work {
+            width: 100%;
+            padding: 100px 5%;
+        }
 
-}
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid black;
+            padding-bottom: 15px;
+            margin-bottom: 35px;
+        }
 
-</style>
+        .section-heading h2 {
+            font-size: clamp(35px, 6vw, 70px);
+            font-weight: 900;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+        }
 
+        .section-heading span {
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* PHOTOGRAPHY COLLECTION */
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            background: #f2f2f2;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.015);
+        }
+
+        /* VIDEOGRAPHY */
+
+        .video-section {
+            margin-top: 130px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .video-card {
+            position: relative;
+            background: #111;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-card video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .video-overlay i {
+            font-size: 45px;
+        }
+
+        /* VIDEO MODAL */
+
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal video {
+            max-width: 100%;
+            max-height: 85vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .close-video {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* CONTACT */
+
+        .contact {
+            padding: 120px 8%;
+            margin-top: 100px;
+            border-top: 1px solid black;
+        }
+
+        .contact h2 {
+            font-size: clamp(55px, 10vw, 120px);
+            font-weight: 900;
+            letter-spacing: -7px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .contact-form {
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-bottom: 1px solid black;
+            background: transparent;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+            resize: vertical;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            width: fit-content;
+            padding: 15px 35px;
+            background: black;
+            color: white;
+            border: 1px solid black;
+            font-size: 12px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .contact-form button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid black;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+            .hero {
+                min-height: 500px;
+            }
+
+            .logo {
+                letter-spacing: -6px;
+            }
+
+            .cd {
+                width: 90vw;
+            }
+
+            .scroll-prompt {
+                right: 20px;
+                bottom: 85px;
+                font-size: 9px;
+            }
+
+            .instagram {
+                bottom: 35px;
+            }
+
+            .work {
+                padding: 70px 4%;
+            }
+
+            .photo-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .section-heading h2 {
+                letter-spacing: -2px;
+            }
+
+            .video-section {
+                margin-top: 90px;
+            }
+
+            .contact {
+                padding: 80px 5%;
+            }
+
+            .contact h2 {
+                letter-spacing: -4px;
+            }
+
+            footer {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
-
-
 
 <body>
 
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+            <img src="images/cd.png" alt="CD" class="cd" id="cd">
 
-<section class="hero">
+            <h1 class="logo" id="logo">mqlam</h1>
 
-
-    <!--
-        YOUR CD IMAGE
-
-        Put your image here:
-
-        images/cd.png
-    -->
-
-    <img
-        src="images/cd.png"
-        class="cd"
-        id="cd"
-        alt=""
-    >
-
-
-    <!-- LOGO -->
-
-    <div class="scene">
-
-        <div
-            class="logo"
-            id="logo"
-        >
-            mqlam
         </div>
 
-    </div>
+        <a class="instagram"
+           href="https://www.instagram.com/YOUR_USERNAME/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
 
-
-    <!-- INSTAGRAM -->
-
-    <a
-        href="https://www.instagram.com/mq.lam/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="instagram-button"
-        aria-label="Instagram"
-    >
-
-        <i
-            class="fa-brands fa-instagram"
-        ></i>
-
-    </a>
-
-
-    <!-- SCROLL -->
-
-    <div
-        class="scroll-indicator"
-    >
-        Scroll ↓
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     PHOTOGRAPHY
-========================================================= -->
-
-<section
-    class="work-section photography"
-    id="photography"
->
-
-
-    <div class="section-header">
-
-        <h2 class="section-title">
-            Photography
-        </h2>
-
-        <div class="section-number">
-            01 / 03
+        <div class="scroll-prompt" id="scrollPrompt">
+            SCROLL TO EXPLORE ↓
         </div>
-
-    </div>
-
+    </section>
 
 
-    <div class="photo-grid">
+    <!-- WORK -->
+    <main class="work">
 
+        <!-- PHOTOGRAPHY -->
+        <section class="photography">
 
-        <!-- =================================================
-             PROJECT 1
-        ================================================= -->
+            <div class="section-heading">
+                <h2>Photography</h2>
+                <span>01 / PHOTO</span>
+            </div>
 
-        <div
-            class="photo-project large"
-            onclick="
-                openGallery('project1')
-            "
-        >
+            <!--
+                Add or remove images by copying a photo-item.
+                Replace the image paths with your own filenames.
+                Images keep their original proportions.
+            -->
 
-            <img
-                src="images/photo1.jpg"
-                alt="Project One"
-            >
+            <div class="photo-grid">
 
-
-            <div class="project-info">
-
-                <div class="project-name">
-                    Project One
+                <div class="photo-item">
+                    <img src="images/photo1.jpg" alt="Photography project 1">
                 </div>
 
-                <div class="project-type">
-                    Horror
+                <div class="photo-item">
+                    <img src="images/photo2.jpg" alt="Photography project 2">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/photo3.jpg" alt="Photography project 3">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/photo4.jpg" alt="Photography project 4">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/photo5.jpg" alt="Photography project 5">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/photo6.jpg" alt="Photography project 6">
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
 
+        <!-- VIDEOGRAPHY -->
+        <section class="video-section">
 
-        <!-- =================================================
-             PROJECT 2
-        ================================================= -->
-
-        <div
-            class="photo-project"
-            onclick="
-                openGallery('project2')
-            "
-        >
-
-            <img
-                src="images/photo2.png"
-                alt="Project Two"
-            >
-
-
-            <div class="project-info">
-
-                <div class="project-name">
-                    Project Two
-                </div>
-
-                <div class="project-type">
-                    Portrait
-                </div>
-
+            <div class="section-heading">
+                <h2>Videography</h2>
+                <span>02 / VIDEO</span>
             </div>
 
-        </div>
+            <div class="video-grid">
 
+                <div class="video-card"
+                     onclick="openVideo('videos/video1.mp4')">
 
+                    <video muted preload="metadata">
+                        <source src="videos/video1.mp4" type="video/mp4">
+                    </video>
 
-        <!-- =================================================
-             PROJECT 3
-        ================================================= -->
+                    <div class="video-overlay">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
 
-        <div
-            class="photo-project"
-            onclick="
-                openGallery('project3')
-            "
-        >
-
-            <img
-                src="images/photo3.jpg"
-                alt="Project Three"
-            >
-
-
-            <div class="project-info">
-
-                <div class="project-name">
-                    Project Three
                 </div>
 
-                <div class="project-type">
-                    Portrait
+
+                <div class="video-card"
+                     onclick="openVideo('videos/video2.mp4')">
+
+                    <video muted preload="metadata">
+                        <source src="videos/video2.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="video-overlay">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+
                 </div>
 
-            </div>
 
-        </div>
+                <div class="video-card"
+                     onclick="openVideo('videos/video3.mp4')">
 
+                    <video muted preload="metadata">
+                        <source src="videos/video3.mp4" type="video/mp4">
+                    </video>
 
+                    <div class="video-overlay">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
 
-        <!-- =================================================
-             PROJECT 4
-        ================================================= -->
-
-        <div
-            class="photo-project"
-            onclick="
-                openGallery('project4')
-            "
-        >
-
-            <img
-                src="images/photo4.jpg"
-                alt="Project Four"
-            >
-
-
-            <div class="project-info">
-
-                <div class="project-name">
-                    Project Four
                 </div>
 
-                <div class="project-type">
-                    Volleyball
+
+                <div class="video-card"
+                     onclick="openVideo('videos/video4.mp4')">
+
+                    <video muted preload="metadata">
+                        <source src="videos/video4.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="video-overlay">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
+    </main>
 
 
-    </div>
+    <!-- VIDEO POPUP -->
+    <div class="video-modal" id="videoModal" onclick="closeVideoOutside(event)">
 
-</section>
-
-
-
-<!-- =========================================================
-     VIDEOGRAPHY
-========================================================= -->
-
-<section
-    class="work-section videography"
-    id="videography"
->
-
-
-    <div class="section-header">
-
-        <h2 class="section-title">
-            Videos
-        </h2>
-
-        <div class="section-number">
-            02 / 03
-        </div>
-
-    </div>
-
-
-
-    <div class="video-grid">
-
-
-        <!-- VIDEO 1 -->
-
-        <div
-            class="video-project large"
-            onclick="
-                openVideo('videos/video1.mp4')
-            "
-        >
-
-            <video
-                src="videos/video1.mp4"
-                muted
-                preload="metadata"
-                playsinline
-            ></video>
-
-
-            <div class="play-button">
-
-                <i
-                    class="fa-solid fa-play"
-                ></i>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- VIDEO 2 -->
-
-        <div
-            class="video-project"
-            onclick="
-                openVideo('videos/video2.mp4')
-            "
-        >
-
-            <video
-                src="videos/video2.mp4"
-                muted
-                preload="metadata"
-                playsinline
-            ></video>
-
-
-            <div class="play-button">
-
-                <i
-                    class="fa-solid fa-play"
-                ></i>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- VIDEO 3 -->
-
-        <div
-            class="video-project"
-            onclick="
-                openVideo('videos/video3.mp4')
-            "
-        >
-
-            <video
-                src="videos/video3.mp4"
-                muted
-                preload="metadata"
-                playsinline
-            ></video>
-
-
-            <div class="play-button">
-
-                <i
-                    class="fa-solid fa-play"
-                ></i>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- VIDEO 4 -->
-
-        <div
-            class="video-project"
-            onclick="
-                openVideo('videos/video4.mp4')
-            "
-        >
-
-            <video
-                src="videos/video4.mp4"
-                muted
-                preload="metadata"
-                playsinline
-            ></video>
-
-
-            <div class="play-button">
-
-                <i
-                    class="fa-solid fa-play"
-                ></i>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     PHOTO GALLERY MODAL
-========================================================= -->
-
-<div
-    class="gallery-modal"
-    id="galleryModal"
->
-
-
-    <div
-        class="gallery-header"
-    >
-
-        <h2
-            class="gallery-title"
-            id="galleryTitle"
-        >
-            Project
-        </h2>
-
-
-        <button
-            class="gallery-close"
-            onclick="
-                closeGallery()
-            "
-            aria-label="Close gallery"
-        >
-            ×
+        <button class="close-video"
+                onclick="closeVideo()"
+                aria-label="Close video">
+            &times;
         </button>
 
-    </div>
-
-
-    <div
-        class="gallery-grid"
-        id="galleryGrid"
-    ></div>
-
-
-</div>
-
-
-
-<!-- =========================================================
-     VIDEO MODAL
-========================================================= -->
-
-<div
-    class="video-modal"
-    id="videoModal"
->
-
-
-    <div
-        class="video-modal-content"
-    >
-
-
-        <button
-            class="video-close"
-            onclick="
-                closeVideo()
-            "
-            aria-label="Close video"
-        >
-            ×
-        </button>
-
-
-        <video
-            id="popupVideo"
-            controls
-            playsinline
-        ></video>
-
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
-
-<section
-    class="contact-section"
-    id="contact"
->
-
-
-    <div class="contact-header">
-
-        <h2 class="contact-title">
-            Contact
-        </h2>
-
-        <div class="contact-number">
-            03 / 03
-        </div>
+        <video id="popupVideo" controls playsinline></video>
 
     </div>
 
 
+    <!-- CONTACT -->
+    <section class="contact">
 
-    <div class="contact-container">
+        <h2>Let's Talk.</h2>
 
+        <form class="contact-form"
+              action="https://formspree.io/f/mwleloew"
+              method="POST">
 
-        <!-- CONTACT INFORMATION -->
-
-        <div class="contact-info">
-
-
-            <p class="contact-big">
-
-                LET'S
-                <br>
-                WORK
-                <br>
-                TOGETHER.
-
-            </p>
-
-
-            <p class="contact-description">
-
-                Have a project, shoot, or creative
-                idea in mind? Send me a message
-                and let's make something.
-
-            </p>
-
-
-            <div class="contact-details">
-
-
-                <div>
-
-                    <span>
-                        EMAIL
-                    </span>
-
-                    <a
-                        href="mailto:mqlamcreate@gmail.com"
-                    >
-                        mqlamcreate@gmail.com
-                    </a>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        INSTAGRAM
-                    </span>
-
-                    <a
-                        href="https://www.instagram.com/mq.lam/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        @mq.lam
-                    </a>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-
-        <!-- FORMSPREE -->
-
-        <form
-            class="contact-form"
-            action="https://formspree.io/f/mwleloew"
-            method="POST"
-        >
-
-
-            <div class="form-group">
-
-                <label for="name">
-                    NAME
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
-                    autocomplete="name"
-                    required
-                >
-
-            </div>
-
-
-
-            <div class="form-group">
-
-                <label for="email">
-                    EMAIL
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-
-
-            <div class="form-group">
-
-                <label for="subject">
-                    SUBJECT
-                </label>
-
-                <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    placeholder="What's this about?"
-                    required
-                >
-
-            </div>
-
-
-
-            <div class="form-group">
-
-                <label for="message">
-                    MESSAGE
-                </label>
-
-                <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell me about your project..."
-                    rows="7"
-                    required
-                ></textarea>
-
-            </div>
-
-
-
-            <button
-                type="submit"
-                class="contact-submit"
+            <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                required
             >
 
-                SEND MESSAGE
+            <input
+                type="email"
+                name="email"
+                placeholder="Your email"
+                required
+            >
 
-                <span>
-                    →
-                </span>
+            <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+            >
 
-            </button>
+            <textarea
+                name="message"
+                placeholder="Your message"
+                required
+            ></textarea>
 
+            <button type="submit">SEND MESSAGE ↗</button>
 
         </form>
 
-    </div>
+    </section>
 
-</section>
 
+    <!-- FOOTER -->
+    <footer>
+        <span>MQLAM © 2026</span>
+        <span>PHOTOGRAPHY · DESIGN · VIDEO</span>
+    </footer>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+    <script>
 
-<footer>
+        /* CURSOR-FOLLOWING LOGO TILT */
 
-    <span>
-        MQLAM
-    </span>
+        const logo = document.getElementById("logo");
 
-    <span>
-        © 2026
-    </span>
+        let targetX = 0;
+        let targetY = 0;
 
-</footer>
+        let currentX = 0;
+        let currentY = 0;
 
+        document.addEventListener("mousemove", (event) => {
 
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
 
-<script>
+            const mouseX = (event.clientX - centerX) / centerX;
+            const mouseY = (event.clientY - centerY) / centerY;
 
-/* =========================================================
-   SMOOTH 3D LOGO CURSOR TRACKING
-========================================================= */
+            targetX = mouseY * -12;
+            targetY = mouseX * 12;
 
-const logo = document.getElementById("logo");
+        });
 
-let targetX = 0;
-let targetY = 0;
+        function animateLogo() {
 
-let currentX = 0;
-let currentY = 0;
+            currentX += (targetX - currentX) * 0.08;
+            currentY += (targetY - currentY) * 0.08;
 
+            logo.style.transform =
+                `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
 
-window.addEventListener("mousemove", (event) => {
-
-    targetX =
-        (event.clientX / window.innerWidth) - 0.5;
-
-    targetY =
-        (event.clientY / window.innerHeight) - 0.5;
-
-});
-
-
-function animateLogo() {
-
-    currentX +=
-        (targetX - currentX) * 0.08;
-
-    currentY +=
-        (targetY - currentY) * 0.08;
-
-
-    const rotateY =
-        currentX * 35;
-
-    const rotateX =
-        -currentY * 35;
-
-
-    logo.style.transform = `
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        scale(1.04)
-    `;
-
-
-    requestAnimationFrame(
-        animateLogo
-    );
-
-}
-
-
-animateLogo();
-
-/* =========================================================
-   CD SCROLL ROTATION
-========================================================= */
-
-const cd =
-    document.getElementById(
-        "cd"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const rotation =
-            window.scrollY * 0.35;
-
-
-        cd.style.transform = `
-
-            translate(
-                -50%,
-                -50%
-            )
-
-            rotate(
-                ${rotation}deg
-            )
-
-        `;
-
-    }
-);
-
-
-/* =========================================================
-   PHOTO GALLERIES
-========================================================= */
-
-const galleries = {
-
-
-    project1: {
-
-        title:
-            "Project One",
-
-        images: [
-
-            "images/project1-1.jpg",
-            "images/project1-2.jpg",
-            "images/project1-3.jpg",
-            "images/project1-4.jpg",
-            "images/project1-5.jpg",
-            "images/project1-6.jpg"
-
-        ]
-
-    },
-
-
-    project2: {
-
-        title:
-            "Project Two",
-
-        images: [
-
-            "images/project2-1.jpg",
-            "images/project2-2.jpg",
-            "images/project2-3.jpg",
-            "images/project2-4.jpg"
-
-        ]
-
-    },
-
-
-    project3: {
-
-        title:
-            "Project Three",
-
-        images: [
-
-            "images/project3-1.jpg",
-            "images/project3-2.jpg",
-            "images/project3-3.jpg",
-            "images/project3-4.jpg"
-
-        ]
-
-    },
-
-
-    project4: {
-
-        title:
-            "Project Four",
-
-        images: [
-
-            "images/project4-1.jpg",
-            "images/project4-2.jpg",
-            "images/project4-3.jpg",
-            "images/project4-4.jpg"
-
-        ]
-
-    },
-
-
-    project5: {
-
-        title:
-            "Project Five",
-
-        images: [
-
-            "images/project5-1.jpg",
-            "images/project5-2.jpg",
-            "images/project5-3.jpg",
-            "images/project5-4.jpg"
-
-        ]
-
-    }
-
-};
-
-
-/* =========================================================
-   OPEN GALLERY
-========================================================= */
-
-function openGallery(
-    project
-) {
-
-    const modal =
-        document.getElementById(
-            "galleryModal"
-        );
-
-
-    const title =
-        document.getElementById(
-            "galleryTitle"
-        );
-
-
-    const grid =
-        document.getElementById(
-            "galleryGrid"
-        );
-
-
-    const gallery =
-        galleries[project];
-
-
-    if (!gallery) {
-
-        return;
-
-    }
-
-
-    title.textContent =
-        gallery.title;
-
-
-    grid.innerHTML =
-        "";
-
-
-    gallery.images.forEach(
-        (image) => {
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                image;
-
-
-            img.alt =
-                gallery.title;
-
-
-            grid.appendChild(
-                img
-            );
-
+            requestAnimationFrame(animateLogo);
         }
-    );
+
+        animateLogo();
 
 
-    modal.classList.add(
-        "active"
-    );
+        /* CD ROTATION ON SCROLL */
+
+        const cd = document.getElementById("cd");
+
+        window.addEventListener("scroll", () => {
+
+            const scrollAmount = window.scrollY;
+
+            cd.style.transform = `rotate(${scrollAmount * 0.35}deg)`;
+
+        });
 
 
-    document.body.style.overflow =
-        "hidden";
+        /* SCROLL PROMPT DISAPPEARS */
+
+        const scrollPrompt = document.getElementById("scrollPrompt");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 50) {
+                scrollPrompt.classList.add("hidden");
+            } else {
+                scrollPrompt.classList.remove("hidden");
+            }
+
+        });
 
 
-    modal.scrollTop =
-        0;
+        /* VIDEO POPUP */
 
-}
+        const videoModal = document.getElementById("videoModal");
+        const popupVideo = document.getElementById("popupVideo");
 
+        function openVideo(videoSource) {
 
-/* =========================================================
-   CLOSE GALLERY
-========================================================= */
+            popupVideo.src = videoSource;
+            videoModal.classList.add("active");
 
-function closeGallery() {
+            popupVideo.load();
 
-    const modal =
-        document.getElementById(
-            "galleryModal"
-        );
-
-
-    modal.classList.remove(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =========================================================
-   VIDEO
-========================================================= */
-
-const videoModal =
-    document.getElementById(
-        "videoModal"
-    );
-
-
-const popupVideo =
-    document.getElementById(
-        "popupVideo"
-    );
-
-
-function openVideo(
-    videoSource
-) {
-
-    popupVideo.src =
-        videoSource;
-
-
-    videoModal.classList.add(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    setTimeout(
-        () => {
-
-            popupVideo.play();
-
-        },
-        300
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE VIDEO
-========================================================= */
-
-function closeVideo() {
-
-    popupVideo.pause();
-
-    popupVideo.currentTime =
-        0;
-
-
-    popupVideo.removeAttribute(
-        "src"
-    );
-
-
-    popupVideo.load();
-
-
-    videoModal.classList.remove(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =========================================================
-   CLICK OUTSIDE VIDEO
-========================================================= */
-
-videoModal.addEventListener(
-    "click",
-    (event) => {
-
-        if (
-            event.target ===
-            videoModal
-        ) {
-
-            closeVideo();
+            popupVideo.play().catch(() => {
+                // The user can press play if the browser blocks autoplay.
+            });
 
         }
 
-    }
-);
+        function closeVideo() {
 
+            popupVideo.pause();
+            popupVideo.removeAttribute("src");
+            popupVideo.load();
 
-/* =========================================================
-   ESCAPE KEY
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            closeGallery();
-
-            closeVideo();
+            videoModal.classList.remove("active");
 
         }
 
-    }
-);
+        function closeVideoOutside(event) {
 
-
-/* =========================================================
-   HIDE SCROLL TEXT
-========================================================= */
-
-const scrollIndicator =
-    document.querySelector(
-        ".scroll-indicator"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (
-            window.scrollY > 20
-        ) {
-
-            scrollIndicator.classList.add(
-                "hidden"
-            );
-
-        } else {
-
-            scrollIndicator.classList.remove(
-                "hidden"
-            );
+            if (event.target === videoModal) {
+                closeVideo();
+            }
 
         }
 
-    }
-);
+        document.addEventListener("keydown", (event) => {
 
-</script>
+            if (event.key === "Escape") {
+                closeVideo();
+            }
 
+        });
+
+    </script>
 
 </body>
-
 </html>
