@@ -1027,8 +1027,424 @@
 
             button.classList.add("active");
 
+<<<<<<< HEAD
             // Make sure the award detail view is closed
             document.getElementById("awardDetail").classList.remove("active");
+=======
+/* =========================================================
+   3D LOGO HOVER
+========================================================= */
+
+const logo =
+    document.getElementById(
+        "logo"
+    );
+
+
+logo.addEventListener(
+    "mousemove",
+    (event) => {
+
+        const rect =
+            logo.getBoundingClientRect();
+
+
+        const x =
+            event.clientX -
+            (
+                rect.left +
+                rect.width / 2
+            );
+
+
+        const y =
+            event.clientY -
+            (
+                rect.top +
+                rect.height / 2
+            );
+
+
+        const rotateY =
+            (
+                x /
+                rect.width
+            ) * 25;
+
+
+        const rotateX =
+            -(
+                y /
+                rect.height
+            ) * 25;
+
+
+        logo.style.transform = `
+
+            rotateX(
+                ${rotateX}deg
+            )
+
+            rotateY(
+                ${rotateY}deg
+            )
+
+            scale(1.04)
+
+        `;
+
+    }
+);
+
+
+logo.addEventListener(
+    "mouseleave",
+    () => {
+
+        logo.style.transform = `
+
+            rotateX(0deg)
+
+            rotateY(0deg)
+
+            scale(1)
+
+        `;
+
+    }
+);
+
+
+/* =========================================================
+   CD SCROLL ROTATION
+========================================================= */
+
+const cd =
+    document.getElementById(
+        "cd"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const rotation =
+            window.scrollY * 0.35;
+
+
+        cd.style.transform = `
+
+            translate(
+                -50%,
+                -50%
+            )
+
+            rotate(
+                ${rotation}deg
+            )
+
+        `;
+
+    }
+);
+
+
+/* =========================================================
+   PHOTO GALLERIES
+========================================================= */
+
+const galleries = {
+
+
+    project1: {
+
+        title:
+            "Project One",
+
+        images: [
+
+            "images/project1-1.jpg",
+            "images/project1-2.jpg",
+            "images/project1-3.jpg",
+            "images/project1-4.jpg",
+            "images/project1-5.jpg",
+            "images/project1-6.jpg"
+
+        ]
+
+    },
+
+
+    project2: {
+
+        title:
+            "Project Two",
+
+        images: [
+
+            "images/project2-1.jpg",
+            "images/project2-2.jpg",
+            "images/project2-3.jpg",
+            "images/project2-4.jpg"
+
+        ]
+
+    },
+
+
+    project3: {
+
+        title:
+            "Project Three",
+
+        images: [
+
+            "images/project3-1.jpg",
+            "images/project3-2.jpg",
+            "images/project3-3.jpg",
+            "images/project3-4.jpg"
+
+        ]
+
+    },
+
+
+    project4: {
+
+        title:
+            "Project Four",
+
+        images: [
+
+            "images/project4-1.jpg",
+            "images/project4-2.jpg",
+            "images/project4-3.jpg",
+            "images/project4-4.jpg"
+
+        ]
+
+    },
+
+
+    project5: {
+
+        title:
+            "Project Five",
+
+        images: [
+
+            "images/project5-1.jpg",
+            "images/project5-2.jpg",
+            "images/project5-3.jpg",
+            "images/project5-4.jpg"
+
+        ]
+
+    }
+
+};
+
+
+/* =========================================================
+   OPEN GALLERY
+========================================================= */
+
+function openGallery(
+    project
+) {
+
+    const modal =
+        document.getElementById(
+            "galleryModal"
+        );
+
+
+    const title =
+        document.getElementById(
+            "galleryTitle"
+        );
+
+
+    const grid =
+        document.getElementById(
+            "galleryGrid"
+        );
+
+
+    const gallery =
+        galleries[project];
+
+
+    if (!gallery) {
+
+        return;
+
+    }
+
+
+    title.textContent =
+        gallery.title;
+
+
+    grid.innerHTML =
+        "";
+
+
+    gallery.images.forEach(
+        (image) => {
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                image;
+
+
+            img.alt =
+                gallery.title;
+
+
+            grid.appendChild(
+                img
+            );
+
+        }
+    );
+
+
+    modal.classList.add(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    modal.scrollTop =
+        0;
+
+}
+
+
+/* =========================================================
+   CLOSE GALLERY
+========================================================= */
+
+function closeGallery() {
+
+    const modal =
+        document.getElementById(
+            "galleryModal"
+        );
+
+
+    modal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+const videoModal =
+    document.getElementById(
+        "videoModal"
+    );
+
+
+const popupVideo =
+    document.getElementById(
+        "popupVideo"
+    );
+
+
+function openVideo(
+    videoSource
+) {
+
+    popupVideo.src =
+        videoSource;
+
+
+    videoModal.classList.add(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    setTimeout(
+        () => {
+
+            popupVideo.play();
+
+        },
+        300
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE VIDEO
+========================================================= */
+
+function closeVideo() {
+
+    popupVideo.pause();
+
+    popupVideo.currentTime =
+        0;
+
+
+    popupVideo.removeAttribute(
+        "src"
+    );
+
+
+    popupVideo.load();
+
+
+    videoModal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   CLICK OUTSIDE VIDEO
+========================================================= */
+
+videoModal.addEventListener(
+    "click",
+    (event) => {
+
+        if (
+            event.target ===
+            videoModal
+        ) {
+
+            closeVideo();
+>>>>>>> parent of 1462e23 (Update index.html)
 
         }
 
