@@ -1,1605 +1,1130 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mqlam — Portfolio</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: white;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* HERO */
-
-        .hero {
-            height: 100vh;
-            min-height: 600px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .cd {
-            position: absolute;
-            width: min(75vw, 650px);
-            height: auto;
-            z-index: 1;
-            pointer-events: none;
-            will-change: transform;
-        }
-
-        .logo {
-            position: relative;
-            z-index: 2;
-            font-size: clamp(75px, 15vw, 190px);
-            font-weight: 900;
-            letter-spacing: -12px;
-            transform-style: preserve-3d;
-            transition: transform 0.12s ease-out;
-            will-change: transform;
-            cursor: default;
-            user-select: none;
-        }
-
-        .logo::before {
-            content: "";
-            position: absolute;
-            inset: -15px -25px;
-            background: white;
-            z-index: -1;
-            clip-path: polygon(
-                50% 0%, 57% 12%, 69% 3%, 73% 17%,
-                88% 11%, 86% 27%, 100% 35%, 88% 47%,
-                98% 60%, 83% 66%, 91% 83%, 73% 82%,
-                66% 100%, 53% 88%, 41% 100%, 34% 84%,
-                16% 91%, 19% 73%, 0% 66%, 13% 52%,
-                0% 39%, 16% 31%, 10% 14%, 30% 18%,
-                37% 2%
-            );
-        }
-
-        .instagram {
-            position: absolute;
-            bottom: 45px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-            font-size: 25px;
-            color: black;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-        }
-
-        .instagram:hover {
-            transform: translateX(-50%) scale(1.15);
-        }
-
-        .scroll-prompt {
-            position: absolute;
-            bottom: 45px;
-            right: 45px;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: opacity 0.3s ease;
-        }
-
-        .scroll-prompt.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* WORK SECTION */
-
-        .work {
-            width: 100%;
-            padding: 100px 5%;
-        }
-
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid black;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(35px, 6vw, 70px);
-            font-weight: 900;
-            letter-spacing: -3px;
-            text-transform: uppercase;
-        }
-
-        .section-heading span {
-            font-size: 12px;
-            letter-spacing: 2px;
-        }
-
-        /* PHOTOGRAPHY NAVIGATION */
-
-        .photo-navigation {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 35px;
-            flex-wrap: wrap;
-        }
-
-        .photo-tab {
-            padding: 12px 27px;
-            background: white;
-            color: black;
-            border: 1px solid black;
-            font-family: inherit;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-
-        .photo-tab:hover {
-            background: #eaeaea;
-        }
-
-        .photo-tab.active {
-            background: black;
-            color: white;
-        }
-
-        /* COLLECTION PAGES */
-
-        .photo-page {
-            display: none;
-            animation: pageFade 0.3s ease;
-        }
-
-        .photo-page.active {
-            display: block;
-        }
-
-        @keyframes pageFade {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .collection-title {
-            font-size: 13px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        /* PHOTO GRID */
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 15px;
-            align-items: start;
-        }
-
-        .photo-item {
-            width: 100%;
-            overflow: hidden;
-            background: #f2f2f2;
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 1 / 1;
-            display: block;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.04);
-        }
-
-        /* AWARDS CLICKABLE PHOTOS */
-
-        .award-card {
-            cursor: pointer;
-            position: relative;
-        }
-
-        .award-card::after {
-            content: "VIEW AWARD ↗";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 13px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-
-        .award-card:hover::after {
-            opacity: 1;
-        }
-
-        /* AWARD DETAIL VIEW */
-
-        .award-detail {
-            display: none;
-            width: 100%;
-            animation: pageFade 0.3s ease;
-        }
-
-        .award-detail.active {
-            display: block;
-        }
-
-        .award-back {
-            background: none;
-            border: none;
-            font-family: inherit;
-            font-size: 11px;
-            letter-spacing: 2px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            padding: 10px 0;
-        }
-
-        .award-back:hover {
-            text-decoration: underline;
-        }
-
-        .award-detail-layout {
-            display: grid;
-            grid-template-columns: 1.5fr 0.8fr;
-            gap: 55px;
-            align-items: center;
-        }
-
-        .award-large-image {
-            width: 100%;
-            background: #f2f2f2;
-        }
-
-        .award-large-image img {
-            width: 100%;
-            max-height: 75vh;
-            object-fit: contain;
-            display: block;
-        }
-
-        .award-information {
-            align-self: center;
-        }
-
-        .award-number {
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: #777;
-            margin-bottom: 25px;
-        }
-
-        .award-information h3 {
-            font-size: clamp(35px, 5vw, 65px);
-            line-height: 0.95;
-            letter-spacing: -3px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        .award-divider {
-            width: 50px;
-            height: 2px;
-            background: black;
-            margin-bottom: 25px;
-        }
-
-        .award-description {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #444;
-            margin-bottom: 30px;
-        }
-
-        .award-recognition {
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            line-height: 1.8;
-        }
-
-        /* VIDEOGRAPHY */
-
-        .video-section {
-            margin-top: 130px;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-        }
-
-        .video-card {
-            position: relative;
-            background: #111;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .video-card video {
-            display: block;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            pointer-events: none;
-        }
-
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            background: rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-
-        .video-card:hover .video-overlay {
-            opacity: 1;
-        }
-
-        .video-overlay i {
-            font-size: 45px;
-        }
-
-        /* VIDEO MODAL */
-
-        .video-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-        }
-
-        .video-modal.active {
-            display: flex;
-        }
-
-        .video-modal video {
-            max-width: 100%;
-            max-height: 85vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .close-video {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            color: white;
-            font-size: 35px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        /* CONTACT */
-
-        .contact {
-            padding: 120px 8%;
-            margin-top: 100px;
-            border-top: 1px solid black;
-        }
-
-        .contact h2 {
-            font-size: clamp(55px, 10vw, 120px);
-            font-weight: 900;
-            letter-spacing: -7px;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-        }
-
-        .contact-form {
-            max-width: 650px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 15px 0;
-            border: none;
-            border-bottom: 1px solid black;
-            background: transparent;
-            font-family: inherit;
-            font-size: 16px;
-            outline: none;
-            resize: vertical;
-        }
-
-        .contact-form textarea {
-            min-height: 120px;
-        }
-
-        .contact-form button {
-            width: fit-content;
-            padding: 15px 35px;
-            background: black;
-            color: white;
-            border: 1px solid black;
-            font-size: 12px;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .contact-form button:hover {
-            background: white;
-            color: black;
-        }
-
-        /* FOOTER */
-
-        footer {
-            padding: 25px 5%;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid black;
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 700px) {
-
-            .hero {
-                min-height: 500px;
-            }
-
-            .logo {
-                letter-spacing: -6px;
-            }
-
-            .cd {
-                width: 90vw;
-            }
-
-            .scroll-prompt {
-                right: 20px;
-                bottom: 85px;
-                font-size: 9px;
-            }
-
-            .instagram {
-                bottom: 35px;
-            }
-
-            .work {
-                padding: 70px 4%;
-            }
-
-            .photo-navigation {
-                gap: 7px;
-            }
-
-            .photo-tab {
-                padding: 11px 17px;
-                font-size: 10px;
-            }
-
-            .photo-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-            }
-
-            .award-detail-layout {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .award-large-image img {
-                max-height: 55vh;
-            }
-
-            .award-information h3 {
-                font-size: 42px;
-            }
-
-            .award-information {
-                padding-bottom: 25px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .section-heading h2 {
-                letter-spacing: -2px;
-            }
-
-            .video-section {
-                margin-top: 90px;
-            }
-
-            .contact {
-                padding: 80px 5%;
-            }
-
-            .contact h2 {
-                letter-spacing: -4px;
-            }
-
-            footer {
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mqlam — Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+/* HERO */
+
+.hero {
+    height: 100vh;
+    min-height: 600px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cd {
+    position: absolute;
+    width: min(75vw, 650px);
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.logo {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    font-size: clamp(75px, 15vw, 190px);
+    font-weight: 900;
+    letter-spacing: -12px;
+    transform-style: preserve-3d;
+    transition: transform 0.12s ease-out;
+    will-change: transform;
+    cursor: default;
+    user-select: none;
+}
+
+/* SPIKY BACKGROUND BEHIND LOGO */
+
+.logo::before {
+    content: "";
+    position: absolute;
+    inset: -15px -25px;
+    background: white;
+    z-index: -1;
+    pointer-events: none;
+    clip-path: polygon(
+        50% 0%, 57% 12%, 69% 3%, 73% 17%,
+        88% 11%, 86% 27%, 100% 35%, 88% 47%,
+        98% 60%, 83% 66%, 91% 83%, 73% 82%,
+        66% 100%, 53% 88%, 41% 100%, 34% 84%,
+        16% 91%, 19% 73%, 0% 66%, 13% 52%,
+        0% 39%, 16% 31%, 10% 14%, 30% 18%,
+        37% 2%
+    );
+}
+
+.instagram {
+    position: absolute;
+    bottom: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-size: 25px;
+    color: black;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.instagram:hover {
+    transform: translateX(-50%) scale(1.15);
+}
+
+.scroll-prompt {
+    position: absolute;
+    bottom: 45px;
+    right: 45px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-prompt.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* WORK SECTION */
+
+.work {
+    width: 100%;
+    padding: 100px 5%;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    font-size: clamp(35px, 6vw, 70px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+}
+
+.section-heading span {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* PHOTOGRAPHY NAVIGATION */
+
+.photo-navigation {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.photo-tab {
+    padding: 12px 27px;
+    background: white;
+    color: black;
+    border: 1px solid black;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.photo-tab:hover {
+    background: #eaeaea;
+}
+
+.photo-tab.active {
+    background: black;
+    color: white;
+}
+
+/* COLLECTION PAGES */
+
+.photo-page {
+    display: none;
+    animation: pageFade 0.3s ease;
+}
+
+.photo-page.active {
+    display: block;
+}
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.collection-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* PHOTO GRID */
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    align-items: start;
+}
+
+.photo-item {
+    width: 100%;
+    overflow: hidden;
+    background: #f2f2f2;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.04);
+}
+
+/* AWARDS CLICKABLE PHOTOS */
+
+.award-card {
+    cursor: pointer;
+    position: relative;
+}
+
+.award-card::after {
+    content: "VIEW AWARD ↗";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 13px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.award-card:hover::after {
+    opacity: 1;
+}
+
+/* AWARD DETAIL VIEW */
+
+.award-detail {
+    display: none;
+    width: 100%;
+    animation: pageFade 0.3s ease;
+}
+
+.award-detail.active {
+    display: block;
+}
+
+.award-back {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.award-back:hover {
+    text-decoration: underline;
+}
+
+.award-detail-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.award-large-image {
+    width: 100%;
+    background: #f2f2f2;
+}
+
+.award-large-image img {
+    width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    display: block;
+}
+
+.award-information {
+    align-self: center;
+}
+
+.award-number {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.award-information h3 {
+    font-size: clamp(35px, 5vw, 65px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.award-divider {
+    width: 50px;
+    height: 2px;
+    background: black;
+    margin-bottom: 25px;
+}
+
+.award-description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.award-recognition {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.8;
+}
+
+/* VIDEOGRAPHY */
+
+.video-section {
+    margin-top: 130px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.video-card {
+    position: relative;
+    background: #111;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.video-card:hover .video-overlay {
+    opacity: 1;
+}
+
+.video-overlay i {
+    font-size: 45px;
+}
+
+/* VIDEO MODAL */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.video-modal video {
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.close-video {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* CONTACT */
+
+.contact {
+    padding: 120px 8%;
+    margin-top: 100px;
+    border-top: 1px solid black;
+}
+
+/* CENTERED LET'S TALK HEADING */
+
+.contact h2 {
+    width: 100%;
+    text-align: center;
+    font-size: clamp(55px, 10vw, 120px);
+    font-weight: 900;
+    letter-spacing: -7px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.contact-form {
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    resize: vertical;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+}
+
+.contact-form button {
+    width: fit-content;
+    padding: 15px 35px;
+    background: black;
+    color: white;
+    border: 1px solid black;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.contact-form button:hover {
+    background: white;
+    color: black;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 25px 5%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+    .hero {
+        min-height: 500px;
+    }
+
+    .logo {
+        letter-spacing: -6px;
+    }
+
+    .cd {
+        width: 90vw;
+    }
+
+    .scroll-prompt {
+        right: 20px;
+        bottom: 85px;
+        font-size: 9px;
+    }
+
+    .instagram {
+        bottom: 35px;
+    }
+
+    .work {
+        padding: 70px 4%;
+    }
+
+    .photo-navigation {
+        gap: 7px;
+    }
+
+    .photo-tab {
+        padding: 11px 17px;
+        font-size: 10px;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .award-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .award-large-image img {
+        max-height: 55vh;
+    }
+
+    .award-information h3 {
+        font-size: 42px;
+    }
+
+    .award-information {
+        padding-bottom: 25px;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .section-heading h2 {
+        letter-spacing: -2px;
+    }
+
+    .video-section {
+        margin-top: 90px;
+    }
+
+    .contact {
+        padding: 80px 5%;
+    }
+
+    .contact h2 {
+        letter-spacing: -4px;
+    }
+
+    footer {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <img src="images/cd.png" alt="CD" class="cd" id="cd">
-
-            <h1 class="logo" id="logo">mqlam</h1>
-
-        </div>
-
-        <a class="instagram"
-           href="https://www.instagram.com/YOUR_USERNAME/"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <div class="scroll-prompt" id="scrollPrompt">
-            SCROLL TO EXPLORE ↓
-        </div>
-
-    </section>
-
-
-    <!-- WORK -->
-
-    <main class="work">
-
-        <!-- PHOTOGRAPHY -->
-
-        <section class="photography">
-
-            <div class="section-heading">
-                <h2>Photography</h2>
-                <span>01 / PHOTO</span>
-            </div>
-
-
-            <!-- COLLECTION BUTTONS -->
-
-            <div class="photo-navigation" id="photoNavigation">
-
-                <button class="photo-tab active"
-                        onclick="showCollection('creative', this)">
-                    Creative
-                </button>
-
-                <button class="photo-tab"
-                        onclick="showCollection('client', this)">
-                    Client
-                </button>
-
-                <button class="photo-tab"
-                        onclick="showCollection('awards', this)">
-                    Awards
-                </button>
-
-            </div>
-
-
-            <!-- CREATIVE COLLECTION -->
-
-            <div class="photo-page active" id="creative">
-
-                <div class="collection-title">Creative</div>
-
-                <div class="photo-grid">
-
-                    <div class="photo-item">
-                        <img src="images/creative1.jpg" alt="Creative photography 1">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/creative2.jpg" alt="Creative photography 2">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/creative3.jpg" alt="Creative photography 3">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/creative4.jpg" alt="Creative photography 4">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/creative5.jpg" alt="Creative photography 5">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/creative6.jpg" alt="Creative photography 6">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CLIENT COLLECTION -->
-
-            <div class="photo-page" id="client">
-
-                <div class="collection-title">Client</div>
-
-                <div class="photo-grid">
-
-                    <div class="photo-item">
-                        <img src="images/client1.jpg" alt="Client photography 1">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/client2.jpg" alt="Client photography 2">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/client3.jpg" alt="Client photography 3">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/client4.jpg" alt="Client photography 4">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/client5.jpg" alt="Client photography 5">
-                    </div>
-
-                    <div class="photo-item">
-                        <img src="images/client6.jpg" alt="Client photography 6">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AWARDS COLLECTION -->
-
-            <div class="photo-page" id="awards">
-
-                <div class="collection-title">Awards</div>
-
-                <div class="photo-grid">
-
-                    <!-- AWARD 1 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards1.jpg',
-                            'Award Title One',
-                            'Write a description of this award here. Explain what the recognition was for, the project involved, and any other details you want visitors to know.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards1.jpg" alt="Award 1">
-
-                    </div>
-
-
-                    <!-- AWARD 2 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards2.jpg',
-                            'Award Title Two',
-                            'Write a description of this award here. Explain the work you submitted and why it received recognition.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards2.jpg" alt="Award 2">
-
-                    </div>
-
-
-                    <!-- AWARD 3 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards3.jpg',
-                            'Award Title Three',
-                            'Write a description of this award here. Include the competition, category, and any details about your achievement.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards3.jpg" alt="Award 3">
-
-                    </div>
-
-
-                    <!-- AWARD 4 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards4.jpg',
-                            'Award Title Four',
-                            'Write a description of this award here.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards4.jpg" alt="Award 4">
-
-                    </div>
-
-
-                    <!-- AWARD 5 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards5.jpg',
-                            'Award Title Five',
-                            'Write a description of this award here.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards5.jpg" alt="Award 5">
-
-                    </div>
-
-
-                    <!-- AWARD 6 -->
-
-                    <div class="photo-item award-card"
-                         onclick="openAward(
-                            'images/awards6.jpg',
-                            'Award Title Six',
-                            'Write a description of this award here.',
-                            'Award Organization · Year'
-                         )">
-
-                        <img src="images/awards6.jpg" alt="Award 6">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AWARD DETAIL VIEW -->
-
-            <div class="award-detail" id="awardDetail">
-
-                <button class="award-back" onclick="closeAward()">
-                    ← BACK TO AWARDS
-                </button>
-
-                <div class="award-detail-layout">
-
-                    <div class="award-large-image">
-                        <img id="awardDetailImage" src="" alt="Award detail">
-                    </div>
-
-                    <div class="award-information">
-
-                        <div class="award-number">
-                            RECOGNITION / AWARD
-                        </div>
-
-                        <h3 id="awardDetailTitle">
-                            Award Title
-                        </h3>
-
-                        <div class="award-divider"></div>
-
-                        <p class="award-description" id="awardDetailDescription">
-                            Award description goes here.
-                        </p>
-
-                        <div class="award-recognition" id="awardDetailRecognition">
-                            Organization · Year
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- VIDEOGRAPHY -->
-
-        <section class="video-section">
-
-            <div class="section-heading">
-                <h2>Videography/Editing</h2>
-                <span>02 / VIDEO</span>
-            </div>
-
-            <div class="video-grid">
-
-                <div class="video-card"
-                     onclick="openVideo('videos/video1.mp4')">
-
-                    <video muted preload="metadata">
-                        <source src="videos/video1.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="video-overlay">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-
-                </div>
-
-                <div class="video-card"
-                     onclick="openVideo('videos/video2.mp4')">
-
-                    <video muted preload="metadata">
-                        <source src="videos/video2.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="video-overlay">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-
-                </div>
-
-                <div class="video-card"
-                     onclick="openVideo('videos/video3.mp4')">
-
-                    <video muted preload="metadata">
-                        <source src="videos/video3.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="video-overlay">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-
-                </div>
-
-                <div class="video-card"
-                     onclick="openVideo('videos/video4.mp4')">
-
-                    <video muted preload="metadata">
-                        <source src="videos/video4.mp4" type="video/mp4">
-                    </video>
-
-                    <div class="video-overlay">
-                        <i class="fa-solid fa-play"></i>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- VIDEO POPUP -->
-
-    <div class="video-modal" id="videoModal" onclick="closeVideoOutside(event)">
-
-        <button class="close-video"
-                onclick="closeVideo()"
-                aria-label="Close video">
-            &times;
-        </button>
-
-        <video id="popupVideo" controls playsinline></video>
-
+<!-- HERO -->
+
+<section class="hero">
+    <div class="hero-content">
+        <img src="images/cd.png" alt="CD" class="cd" id="cd">
+        <h1 class="logo" id="logo">mqlam</h1>
     </div>
 
+    <a class="instagram"
+       href="https://www.instagram.com/YOUR_USERNAME/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
 
-    <!-- CONTACT -->
+    <div class="scroll-prompt" id="scrollPrompt">
+        SCROLL TO EXPLORE ↓
+    </div>
+</section>
 
-    <section class="contact">
+<!-- WORK -->
 
-        <h2>Let's Talk.</h2>
+<main class="work">
 
-        <form class="contact-form"
-              action="https://formspree.io/f/mwleloew"
-              method="POST">
+    <!-- PHOTOGRAPHY -->
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Your name"
-                required
-            >
+    <section class="photography">
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Your email"
-                required
-            >
+        <div class="section-heading">
+            <h2>Photography</h2>
+            <span>01 / PHOTO</span>
+        </div>
 
-            <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-            >
+        <!-- COLLECTION BUTTONS -->
 
-            <textarea
-                name="message"
-                placeholder="Your message"
-                required
-            ></textarea>
+        <div class="photo-navigation" id="photoNavigation">
+            <button class="photo-tab active"
+                    onclick="showCollection('creative', this)">
+                Creative
+            </button>
 
-            <button type="submit">SEND MESSAGE ↗</button>
+            <button class="photo-tab"
+                    onclick="showCollection('client', this)">
+                Client
+            </button>
 
-        </form>
+            <button class="photo-tab"
+                    onclick="showCollection('awards', this)">
+                Awards
+            </button>
+        </div>
+
+        <!-- CREATIVE COLLECTION -->
+
+        <div class="photo-page active" id="creative">
+            <div class="collection-title">Creative</div>
+
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="images/creative1.jpg" alt="Creative photography 1">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/creative2.jpg" alt="Creative photography 2">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/creative3.jpg" alt="Creative photography 3">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/creative4.jpg" alt="Creative photography 4">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/creative5.jpg" alt="Creative photography 5">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/creative6.jpg" alt="Creative photography 6">
+                </div>
+            </div>
+        </div>
+
+        <!-- CLIENT COLLECTION -->
+
+        <div class="photo-page" id="client">
+            <div class="collection-title">Client</div>
+
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="images/client1.jpg" alt="Client photography 1">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/client2.jpg" alt="Client photography 2">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/client3.jpg" alt="Client photography 3">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/client4.jpg" alt="Client photography 4">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/client5.jpg" alt="Client photography 5">
+                </div>
+
+                <div class="photo-item">
+                    <img src="images/client6.jpg" alt="Client photography 6">
+                </div>
+            </div>
+        </div>
+
+        <!-- AWARDS COLLECTION -->
+
+        <div class="photo-page" id="awards">
+            <div class="collection-title">Awards</div>
+
+            <div class="photo-grid">
+
+                <!-- AWARD 1 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards1.jpg',
+                        'Award Title One',
+                        'Write a description of this award here. Explain what the recognition was for, the project involved, and any other details you want visitors to know.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards1.jpg" alt="Award 1">
+                </div>
+
+                <!-- AWARD 2 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards2.jpg',
+                        'Award Title Two',
+                        'Write a description of this award here. Explain the work you submitted and why it received recognition.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards2.jpg" alt="Award 2">
+                </div>
+
+                <!-- AWARD 3 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards3.jpg',
+                        'Award Title Three',
+                        'Write a description of this award here. Include the competition, category, and any details about your achievement.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards3.jpg" alt="Award 3">
+                </div>
+
+                <!-- AWARD 4 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards4.jpg',
+                        'Award Title Four',
+                        'Write a description of this award here.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards4.jpg" alt="Award 4">
+                </div>
+
+                <!-- AWARD 5 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards5.jpg',
+                        'Award Title Five',
+                        'Write a description of this award here.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards5.jpg" alt="Award 5">
+                </div>
+
+                <!-- AWARD 6 -->
+
+                <div class="photo-item award-card"
+                     onclick="openAward(
+                        'images/awards6.jpg',
+                        'Award Title Six',
+                        'Write a description of this award here.',
+                        'Award Organization · Year'
+                     )">
+                    <img src="images/awards6.jpg" alt="Award 6">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- AWARD DETAIL VIEW -->
+
+        <div class="award-detail" id="awardDetail">
+
+            <button class="award-back" onclick="closeAward()">
+                ← BACK TO AWARDS
+            </button>
+
+            <div class="award-detail-layout">
+
+                <div class="award-large-image">
+                    <img id="awardDetailImage" src="" alt="Award detail">
+                </div>
+
+                <div class="award-information">
+
+                    <div class="award-number">
+                        RECOGNITION / AWARD
+                    </div>
+
+                    <h3 id="awardDetailTitle">
+                        Award Title
+                    </h3>
+
+                    <div class="award-divider"></div>
+
+                    <p class="award-description" id="awardDetailDescription">
+                        Award description goes here.
+                    </p>
+
+                    <div class="award-recognition" id="awardDetailRecognition">
+                        Organization · Year
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     </section>
 
+    <!-- VIDEOGRAPHY -->
+
+    <section class="video-section">
+
+        <div class="section-heading">
+            <h2>Videography/Editing</h2>
+            <span>02 / VIDEO</span>
+        </div>
+
+        <div class="video-grid">
+
+            <div class="video-card"
+                 onclick="openVideo('videos/video1.mp4')">
+                <video muted preload="metadata">
+                    <source src="videos/video1.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
+
+            <div class="video-card"
+                 onclick="openVideo('videos/video2.mp4')">
+                <video muted preload="metadata">
+                    <source src="videos/video2.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
+
+            <div class="video-card"
+                 onclick="openVideo('videos/video3.mp4')">
+                <video muted preload="metadata">
+                    <source src="videos/video3.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
 
-    <!-- FOOTER -->
+            <div class="video-card"
+                 onclick="openVideo('videos/video4.mp4')">
+                <video muted preload="metadata">
+                    <source src="videos/video4.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>
 
-    <footer>
-        <span>MQLAM © 2026</span>
-        <span>PHOTOGRAPHY · DESIGN · VIDEO</span>
-    </footer>
+        </div>
+    </section>
 
+</main>
 
-    <script>
+<!-- VIDEO POPUP -->
 
-        /* COLLECTION SWITCHING */
+<div class="video-modal" id="videoModal" onclick="closeVideoOutside(event)">
 
-        function showCollection(collection, button) {
+    <button class="close-video"
+            onclick="closeVideo()"
+            aria-label="Close video">
+        &times;
+    </button>
 
-            document.querySelectorAll(".photo-page").forEach(page => {
-                page.classList.remove("active");
-            });
+    <video id="popupVideo" controls playsinline></video>
 
-            document.querySelectorAll(".photo-tab").forEach(tab => {
-                tab.classList.remove("active");
-            });
+</div>
 
-            document.getElementById(collection).classList.add("active");
+<!-- CONTACT -->
 
-            button.classList.add("active");
+<section class="contact">
 
-<<<<<<< HEAD
-            // Make sure the award detail view is closed
-            document.getElementById("awardDetail").classList.remove("active");
-=======
-/* =========================================================
-   3D LOGO HOVER
-========================================================= */
+    <h2>Let's Talk.</h2>
 
-const logo =
-    document.getElementById(
-        "logo"
-    );
+    <form class="contact-form"
+          action="https://formspree.io/f/mwleloew"
+          method="POST">
 
+        <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+        >
 
-logo.addEventListener(
-    "mousemove",
-    (event) => {
+        <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+        >
 
-        const rect =
-            logo.getBoundingClientRect();
+        <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+        >
 
+        <textarea
+            name="message"
+            placeholder="Your message"
+            required
+        ></textarea>
 
-        const x =
-            event.clientX -
-            (
-                rect.left +
-                rect.width / 2
-            );
+        <button type="submit">SEND MESSAGE ↗</button>
 
+    </form>
 
-        const y =
-            event.clientY -
-            (
-                rect.top +
-                rect.height / 2
-            );
+</section>
 
+<!-- FOOTER -->
 
-        const rotateY =
-            (
-                x /
-                rect.width
-            ) * 25;
+<footer>
+    <span>MQLAM © 2026</span>
+    <span>PHOTOGRAPHY · DESIGN · VIDEO</span>
+</footer>
 
+<script>
 
-        const rotateX =
-            -(
-                y /
-                rect.height
-            ) * 25;
+/* COLLECTION SWITCHING */
 
+function showCollection(collection, button) {
 
-        logo.style.transform = `
+    document.querySelectorAll(".photo-page").forEach(page => {
+        page.classList.remove("active");
+    });
 
-            rotateX(
-                ${rotateX}deg
-            )
+    document.querySelectorAll(".photo-tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
 
-            rotateY(
-                ${rotateY}deg
-            )
+    document.getElementById(collection).classList.add("active");
 
-            scale(1.04)
+    button.classList.add("active");
 
-        `;
-
-    }
-);
-
-
-logo.addEventListener(
-    "mouseleave",
-    () => {
-
-        logo.style.transform = `
-
-            rotateX(0deg)
-
-            rotateY(0deg)
-
-            scale(1)
-
-        `;
-
-    }
-);
-
-
-/* =========================================================
-   CD SCROLL ROTATION
-========================================================= */
-
-const cd =
-    document.getElementById(
-        "cd"
-    );
-
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const rotation =
-            window.scrollY * 0.35;
-
-
-        cd.style.transform = `
-
-            translate(
-                -50%,
-                -50%
-            )
-
-            rotate(
-                ${rotation}deg
-            )
-
-        `;
-
-    }
-);
-
-
-/* =========================================================
-   PHOTO GALLERIES
-========================================================= */
-
-const galleries = {
-
-
-    project1: {
-
-        title:
-            "Project One",
-
-        images: [
-
-            "images/project1-1.jpg",
-            "images/project1-2.jpg",
-            "images/project1-3.jpg",
-            "images/project1-4.jpg",
-            "images/project1-5.jpg",
-            "images/project1-6.jpg"
-
-        ]
-
-    },
-
-
-    project2: {
-
-        title:
-            "Project Two",
-
-        images: [
-
-            "images/project2-1.jpg",
-            "images/project2-2.jpg",
-            "images/project2-3.jpg",
-            "images/project2-4.jpg"
-
-        ]
-
-    },
-
-
-    project3: {
-
-        title:
-            "Project Three",
-
-        images: [
-
-            "images/project3-1.jpg",
-            "images/project3-2.jpg",
-            "images/project3-3.jpg",
-            "images/project3-4.jpg"
-
-        ]
-
-    },
-
-
-    project4: {
-
-        title:
-            "Project Four",
-
-        images: [
-
-            "images/project4-1.jpg",
-            "images/project4-2.jpg",
-            "images/project4-3.jpg",
-            "images/project4-4.jpg"
-
-        ]
-
-    },
-
-
-    project5: {
-
-        title:
-            "Project Five",
-
-        images: [
-
-            "images/project5-1.jpg",
-            "images/project5-2.jpg",
-            "images/project5-3.jpg",
-            "images/project5-4.jpg"
-
-        ]
-
-    }
-
-};
-
-
-/* =========================================================
-   OPEN GALLERY
-========================================================= */
-
-function openGallery(
-    project
-) {
-
-    const modal =
-        document.getElementById(
-            "galleryModal"
-        );
-
-
-    const title =
-        document.getElementById(
-            "galleryTitle"
-        );
-
-
-    const grid =
-        document.getElementById(
-            "galleryGrid"
-        );
-
-
-    const gallery =
-        galleries[project];
-
-
-    if (!gallery) {
-
-        return;
-
-    }
-
-
-    title.textContent =
-        gallery.title;
-
-
-    grid.innerHTML =
-        "";
-
-
-    gallery.images.forEach(
-        (image) => {
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                image;
-
-
-            img.alt =
-                gallery.title;
-
-
-            grid.appendChild(
-                img
-            );
-
-        }
-    );
-
-
-    modal.classList.add(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    modal.scrollTop =
-        0;
-
+    document.getElementById("awardDetail").classList.remove("active");
 }
 
+/* AWARD DETAIL VIEW */
 
-/* =========================================================
-   CLOSE GALLERY
-========================================================= */
+function openAward(image, title, description, recognition) {
 
-function closeGallery() {
+    document.getElementById("awards").classList.remove("active");
 
-    const modal =
-        document.getElementById(
-            "galleryModal"
-        );
+    const detail = document.getElementById("awardDetail");
 
+    document.getElementById("awardDetailImage").src = image;
+    document.getElementById("awardDetailTitle").textContent = title;
+    document.getElementById("awardDetailDescription").textContent = description;
+    document.getElementById("awardDetailRecognition").textContent = recognition;
 
-    modal.classList.remove(
-        "active"
-    );
+    detail.classList.add("active");
 
-
-    document.body.style.overflow =
-        "";
-
+    detail.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
+/* CLOSE AWARD DETAIL */
 
-/* =========================================================
-   VIDEO
-========================================================= */
+function closeAward() {
 
-const videoModal =
-    document.getElementById(
-        "videoModal"
-    );
+    document.getElementById("awardDetail").classList.remove("active");
 
+    document.getElementById("awards").classList.add("active");
 
-const popupVideo =
-    document.getElementById(
-        "popupVideo"
-    );
-
-
-function openVideo(
-    videoSource
-) {
-
-    popupVideo.src =
-        videoSource;
-
-
-    videoModal.classList.add(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    setTimeout(
-        () => {
-
-            popupVideo.play();
-
-        },
-        300
-    );
-
+    document.getElementById("awards").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
+/* CURSOR-FOLLOWING LOGO TILT */
 
-/* =========================================================
-   CLOSE VIDEO
-========================================================= */
+const logo = document.getElementById("logo");
+
+let targetX = 0;
+let targetY = 0;
+
+let currentX = 0;
+let currentY = 0;
+
+document.addEventListener("mousemove", (event) => {
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const mouseX = (event.clientX - centerX) / centerX;
+    const mouseY = (event.clientY - centerY) / centerY;
+
+    targetX = mouseY * -12;
+    targetY = mouseX * 12;
+
+});
+
+function animateLogo() {
+
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+
+    logo.style.transform =
+        `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+
+    requestAnimationFrame(animateLogo);
+}
+
+animateLogo();
+
+/* CD ROTATION ON SCROLL */
+
+const cd = document.getElementById("cd");
+
+window.addEventListener("scroll", () => {
+
+    const scrollAmount = window.scrollY;
+
+    cd.style.transform = `rotate(${scrollAmount * 0.35}deg)`;
+
+});
+
+/* SCROLL PROMPT DISAPPEARS */
+
+const scrollPrompt = document.getElementById("scrollPrompt");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 50) {
+        scrollPrompt.classList.add("hidden");
+    } else {
+        scrollPrompt.classList.remove("hidden");
+    }
+
+});
+
+/* VIDEO POPUP */
+
+const videoModal = document.getElementById("videoModal");
+const popupVideo = document.getElementById("popupVideo");
+
+function openVideo(videoSource) {
+
+    popupVideo.src = videoSource;
+    videoModal.classList.add("active");
+
+    popupVideo.load();
+
+    popupVideo.play().catch(() => {
+        // The user can press play if autoplay is blocked.
+    });
+
+}
 
 function closeVideo() {
 
     popupVideo.pause();
-
-    popupVideo.currentTime =
-        0;
-
-
-    popupVideo.removeAttribute(
-        "src"
-    );
-
-
+    popupVideo.removeAttribute("src");
     popupVideo.load();
 
-
-    videoModal.classList.remove(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "";
+    videoModal.classList.remove("active");
 
 }
 
+function closeVideoOutside(event) {
 
-/* =========================================================
-   CLICK OUTSIDE VIDEO
-========================================================= */
+    if (event.target === videoModal) {
+        closeVideo();
+    }
 
-videoModal.addEventListener(
-    "click",
-    (event) => {
+}
 
-        if (
-            event.target ===
-            videoModal
-        ) {
+/* ESCAPE KEY */
 
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        if (videoModal.classList.contains("active")) {
             closeVideo();
->>>>>>> parent of 1462e23 (Update index.html)
-
         }
 
-
-        /* AWARD DETAIL VIEW */
-
-        function openAward(image, title, description, recognition) {
-
-            document.getElementById("awards").classList.remove("active");
-
-            const detail = document.getElementById("awardDetail");
-
-            document.getElementById("awardDetailImage").src = image;
-            document.getElementById("awardDetailTitle").textContent = title;
-            document.getElementById("awardDetailDescription").textContent = description;
-            document.getElementById("awardDetailRecognition").textContent = recognition;
-
-            detail.classList.add("active");
-
-            detail.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
+        if (document.getElementById("awardDetail").classList.contains("active")) {
+            closeAward();
         }
+    }
 
+});
 
-        /* CLOSE AWARD DETAIL */
-
-        function closeAward() {
-
-            document.getElementById("awardDetail").classList.remove("active");
-
-            document.getElementById("awards").classList.add("active");
-
-            document.getElementById("awards").scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        }
-
-
-        /* CURSOR-FOLLOWING LOGO TILT */
-
-        const logo = document.getElementById("logo");
-
-        let targetX = 0;
-        let targetY = 0;
-
-        let currentX = 0;
-        let currentY = 0;
-
-        document.addEventListener("mousemove", (event) => {
-
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-
-            const mouseX = (event.clientX - centerX) / centerX;
-            const mouseY = (event.clientY - centerY) / centerY;
-
-            targetX = mouseY * -12;
-            targetY = mouseX * 12;
-
-        });
-
-        function animateLogo() {
-
-            currentX += (targetX - currentX) * 0.08;
-            currentY += (targetY - currentY) * 0.08;
-
-            logo.style.transform =
-                `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
-
-            requestAnimationFrame(animateLogo);
-
-        }
-
-        animateLogo();
-
-
-        /* CD ROTATION ON SCROLL */
-
-        const cd = document.getElementById("cd");
-
-        window.addEventListener("scroll", () => {
-
-            const scrollAmount = window.scrollY;
-
-            cd.style.transform = `rotate(${scrollAmount * 0.35}deg)`;
-
-        });
-
-
-        /* SCROLL PROMPT DISAPPEARS */
-
-        const scrollPrompt = document.getElementById("scrollPrompt");
-
-        window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 50) {
-                scrollPrompt.classList.add("hidden");
-            } else {
-                scrollPrompt.classList.remove("hidden");
-            }
-
-        });
-
-
-        /* VIDEO POPUP */
-
-        const videoModal = document.getElementById("videoModal");
-        const popupVideo = document.getElementById("popupVideo");
-
-        function openVideo(videoSource) {
-
-            popupVideo.src = videoSource;
-            videoModal.classList.add("active");
-
-            popupVideo.load();
-
-            popupVideo.play().catch(() => {
-                // The user can press play if autoplay is blocked.
-            });
-
-        }
-
-        function closeVideo() {
-
-            popupVideo.pause();
-            popupVideo.removeAttribute("src");
-            popupVideo.load();
-
-            videoModal.classList.remove("active");
-
-        }
-
-        function closeVideoOutside(event) {
-
-            if (event.target === videoModal) {
-                closeVideo();
-            }
-
-        }
-
-        document.addEventListener("keydown", (event) => {
-
-            if (event.key === "Escape") {
-                closeVideo();
-                closeAward();
-            }
-
-        });
-
-    </script>
+</script>
 
 </body>
 </html>
