@@ -131,7 +131,7 @@
             align-items: center;
             border-bottom: 1px solid black;
             padding-bottom: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .section-heading h2 {
@@ -146,7 +146,72 @@
             letter-spacing: 2px;
         }
 
-        /* PHOTOGRAPHY GRID */
+        /* PHOTOGRAPHY NAVIGATION */
+
+        .photo-navigation {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .photo-tab {
+            padding: 12px 27px;
+            background: white;
+            color: black;
+            border: 1px solid black;
+            font-family: inherit;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .photo-tab:hover {
+            background: #eaeaea;
+        }
+
+        .photo-tab.active {
+            background: black;
+            color: white;
+        }
+
+        .photo-tab.active:hover {
+            background: #333;
+        }
+
+        /* COLLECTION PAGES */
+
+        .photo-page {
+            display: none;
+            animation: pageFade 0.3s ease;
+        }
+
+        .photo-page.active {
+            display: block;
+        }
+
+        @keyframes pageFade {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .collection-title {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* PHOTO GRID */
 
         .photo-grid {
             display: grid;
@@ -354,6 +419,15 @@
                 padding: 70px 4%;
             }
 
+            .photo-navigation {
+                gap: 7px;
+            }
+
+            .photo-tab {
+                padding: 11px 17px;
+                font-size: 10px;
+            }
+
             .photo-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 10px;
@@ -391,7 +465,9 @@
 <body>
 
     <!-- HERO -->
+
     <section class="hero">
+
         <div class="hero-content">
 
             <img src="images/cd.png" alt="CD" class="cd" id="cd">
@@ -411,13 +487,16 @@
         <div class="scroll-prompt" id="scrollPrompt">
             SCROLL TO EXPLORE ↓
         </div>
+
     </section>
 
 
     <!-- WORK -->
+
     <main class="work">
 
         <!-- PHOTOGRAPHY -->
+
         <section class="photography">
 
             <div class="section-heading">
@@ -425,42 +504,145 @@
                 <span>01 / PHOTO</span>
             </div>
 
-            <div class="photo-grid">
 
-                <div class="photo-item">
-                    <img src="images/photo1.jpg" alt="Photography project 1">
+            <!-- COLLECTION BUTTONS -->
+
+            <div class="photo-navigation">
+
+                <button
+                    class="photo-tab active"
+                    onclick="showCollection('creative', this)">
+                    Creative
+                </button>
+
+                <button
+                    class="photo-tab"
+                    onclick="showCollection('client', this)">
+                    Client
+                </button>
+
+                <button
+                    class="photo-tab"
+                    onclick="showCollection('awards', this)">
+                    Awards
+                </button>
+
+            </div>
+
+
+            <!-- CREATIVE COLLECTION -->
+            <!-- This collection is selected by default -->
+
+            <div class="photo-page active" id="creative">
+
+                <div class="collection-title">
+                    Creative
                 </div>
 
-                <div class="photo-item">
-                    <img src="images/photo2.jpg" alt="Photography project 2">
+                <div class="photo-grid">
+
+                    <div class="photo-item">
+                        <img src="images/creative1.jpg" alt="Creative photography 1">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/creative2.jpg" alt="Creative photography 2">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/creative3.jpg" alt="Creative photography 3">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/creative4.jpg" alt="Creative photography 4">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/creative5.jpg" alt="Creative photography 5">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/creative6.jpg" alt="Creative photography 6">
+                    </div>
+
                 </div>
 
-                <div class="photo-item">
-                    <img src="images/photo3.jpg" alt="Photography project 3">
+            </div>
+
+
+            <!-- CLIENT COLLECTION -->
+
+            <div class="photo-page" id="client">
+
+                <div class="collection-title">
+                    Client
                 </div>
 
-                <div class="photo-item">
-                    <img src="images/photo4.jpg" alt="Photography project 4">
+                <div class="photo-grid">
+
+                    <div class="photo-item">
+                        <img src="images/client1.jpg" alt="Client photography 1">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/client2.jpg" alt="Client photography 2">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/client3.jpg" alt="Client photography 3">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/client4.jpg" alt="Client photography 4">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/client5.jpg" alt="Client photography 5">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/client6.jpg" alt="Client photography 6">
+                    </div>
+
                 </div>
 
-                <div class="photo-item">
-                    <img src="images/photo5.jpg" alt="Photography project 5">
+            </div>
+
+
+            <!-- AWARDS COLLECTION -->
+
+            <div class="photo-page" id="awards">
+
+                <div class="collection-title">
+                    Awards
                 </div>
 
-                <div class="photo-item">
-                    <img src="images/photo6.jpg" alt="Photography project 6">
-                </div>
+                <div class="photo-grid">
 
-                <div class="photo-item">
-                    <img src="images/photo7.jpg" alt="Photography project 7">
-                </div>
+                    <div class="photo-item">
+                        <img src="images/awards1.jpg" alt="Awards photography 1">
+                    </div>
 
-                <div class="photo-item">
-                    <img src="images/photo8.jpg" alt="Photography project 8">
-                </div>
+                    <div class="photo-item">
+                        <img src="images/awards2.jpg" alt="Awards photography 2">
+                    </div>
 
-                <div class="photo-item">
-                    <img src="images/photo9.jpg" alt="Photography project 9">
+                    <div class="photo-item">
+                        <img src="images/awards3.jpg" alt="Awards photography 3">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/awards4.jpg" alt="Awards photography 4">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/awards5.jpg" alt="Awards photography 5">
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="images/awards6.jpg" alt="Awards photography 6">
+                    </div>
+
                 </div>
 
             </div>
@@ -469,6 +651,7 @@
 
 
         <!-- VIDEOGRAPHY -->
+
         <section class="video-section">
 
             <div class="section-heading">
@@ -491,6 +674,7 @@
 
                 </div>
 
+
                 <div class="video-card"
                      onclick="openVideo('videos/video2.mp4')">
 
@@ -504,6 +688,7 @@
 
                 </div>
 
+
                 <div class="video-card"
                      onclick="openVideo('videos/video3.mp4')">
 
@@ -516,6 +701,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="video-card"
                      onclick="openVideo('videos/video4.mp4')">
@@ -538,6 +724,7 @@
 
 
     <!-- VIDEO POPUP -->
+
     <div class="video-modal" id="videoModal" onclick="closeVideoOutside(event)">
 
         <button class="close-video"
@@ -552,6 +739,7 @@
 
 
     <!-- CONTACT -->
+
     <section class="contact">
 
         <h2>Let's Talk.</h2>
@@ -594,6 +782,7 @@
 
 
     <!-- FOOTER -->
+
     <footer>
         <span>MQLAM © 2026</span>
         <span>PHOTOGRAPHY · DESIGN · VIDEO</span>
@@ -601,6 +790,29 @@
 
 
     <script>
+
+        /* COLLECTION SWITCHING */
+
+        function showCollection(collection, button) {
+
+            // Hide every collection
+            document.querySelectorAll(".photo-page").forEach(page => {
+                page.classList.remove("active");
+            });
+
+            // Remove active styling from every button
+            document.querySelectorAll(".photo-tab").forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            // Show selected collection
+            document.getElementById(collection).classList.add("active");
+
+            // Highlight selected button
+            button.classList.add("active");
+
+        }
+
 
         /* CURSOR-FOLLOWING LOGO TILT */
 
@@ -634,6 +846,7 @@
                 `perspective(800px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
 
             requestAnimationFrame(animateLogo);
+
         }
 
         animateLogo();
