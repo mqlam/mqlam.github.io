@@ -728,6 +728,24 @@ footer {
     line-height: 1.8;
 }
 
+.award-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    font-size: 35px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    color: black;
+    transition: transform 0.2s ease;
+}
+
+.award-close:hover {
+    transform: rotate(90deg);
+}
+
 </style>
 </head>
 
@@ -937,6 +955,10 @@ footer {
         <!-- AWARD DETAIL VIEW -->
 
         <div class="award-detail" id="awardDetail">
+
+            <button class="award-close" onclick="closeAward()" aria-label="Close award">
+             X
+            </button>
 
             <button class="award-back" onclick="closeAward()">
                 ← BACK TO AWARDS
