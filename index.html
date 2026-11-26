@@ -67,17 +67,22 @@ body {
     will-change: transform;
     cursor: default;
     user-select: none;
+
+    /* White outline around mqlam */
+    -webkit-text-stroke: 2.5px white;
+    paint-order: stroke fill;
 }
 
-/* SPIKY BACKGROUND BEHIND LOGO */
+/* BLACK SPIKY BLURB */
 
 .logo::before {
     content: "";
     position: absolute;
     inset: -15px -25px;
-    background: white;
+    background: black;
     z-index: -1;
     pointer-events: none;
+
     clip-path: polygon(
         50% 0%, 57% 12%, 69% 3%, 73% 17%,
         88% 11%, 86% 27%, 100% 35%, 88% 47%,
