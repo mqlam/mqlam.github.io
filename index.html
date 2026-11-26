@@ -595,7 +595,139 @@ footer {
         gap: 15px;
         flex-wrap: wrap;
     }
+
+    .award-detail {
+    padding: 15px;
 }
+
+    .award-detail-inner {
+        padding: 25px;
+        max-height: 94vh;
+    }
+
+    .award-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .award-large-image img {
+        max-height: 45vh;
+    }
+
+    .award-information h3 {
+        font-size: 42px;
+    }
+
+    .award-information {
+        padding-bottom: 10px;
+    }
+    
+}
+
+/* AWARD DETAIL POPUP — SINGLE-IMAGE GALLERY */
+
+.award-detail {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.88);
+    animation: pageFade 0.3s ease;
+}
+
+.award-detail.active {
+    display: flex;
+}
+
+.award-detail-inner {
+    position: relative;
+    width: min(1100px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 55px;
+    background: white;
+}
+
+.award-back {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.award-back:hover {
+    text-decoration: underline;
+}
+
+.award-detail-layout {
+    display: grid;
+    grid-template-columns: 1.25fr 0.8fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.award-large-image {
+    width: 100%;
+    background: #f2f2f2;
+}
+
+.award-large-image img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    display: block;
+}
+
+.award-information {
+    align-self: center;
+}
+
+.award-number {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.award-information h3 {
+    font-size: clamp(35px, 5vw, 65px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.award-divider {
+    width: 50px;
+    height: 2px;
+    background: black;
+    margin-bottom: 25px;
+}
+
+.award-description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.award-recognition {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    line-height: 1.8;
+}
+
 </style>
 </head>
 
@@ -835,6 +967,54 @@ footer {
                     </div>
 
                 </div>
+            </div>
+        </div>
+
+                <!-- AWARD DETAIL POPUP -->
+
+        <div class="award-detail"
+            id="awardDetail"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Award details"
+            onclick="closeAwardOutside(event)">
+
+            <div class="award-detail-inner">
+
+                <button class="award-back" onclick="closeAward()">
+                    ← BACK TO AWARDS
+                </button>
+
+                <div class="award-detail-layout">
+
+                    <div class="award-large-image">
+                        <img id="awardDetailImage" src="" alt="Award detail">
+                    </div>
+
+                    <div class="award-information">
+
+                        <div class="award-number">
+                            RECOGNITION / AWARD
+                        </div>
+
+                        <h3 id="awardDetailTitle">
+                            Award Title
+                        </h3>
+
+                        <div class="award-divider"></div>
+
+                        <p class="award-description" id="awardDetailDescription">
+                            Award description goes here.
+                        </p>
+
+                        <div class="award-recognition" id="awardDetailRecognition">
+                            Organization · Year
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
@@ -1129,6 +1309,39 @@ document.addEventListener("keydown", (event) => {
     }
 
 });
+
+/* AWARD DETAIL VIEW */
+
+function openAward(image, title, description, recognition) {
+    document.getElementById("awards").classList.remove("active");
+
+    const detail = document.getElementById("awardDetail");
+
+    document.getElementById("awardDetailImage").src = image;
+    document.getElementById("awardDetailTitle").textContent = title;
+    document.getElementById("awardDetailDescription").textContent = description;
+    document.getElementById("awardDetailRecognition").textContent = recognition;
+
+    detail.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeAwardOutside(event) {
+    if (event.target === document.getElementById("awardDetail")) {
+        closeAward();
+    }
+}
+
+function closeAward() {
+    document.getElementById("awardDetail").classList.remove("active");
+    document.body.style.overflow = "";
+
+    document.getElementById("awards").classList.add("active");
+    document.getElementById("awards").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
 
 </script>
 
