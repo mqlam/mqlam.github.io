@@ -860,13 +860,15 @@ footer {
                 <!-- AWARD 1 -->
 
                 <div class="photo-item award-card"
-                     onclick="openAward(
+                    onclick="openAward(
                         'images/awards1.jpg',
                         'Award Title One',
-                        'Write a description of this award here. Explain what the recognition was for, the project involved, and any other details you want visitors to know.',
+                        'Write your award description here.',
                         'Award Organization · Year'
-                     )">
+                    )">
+
                     <img src="images/awards1.jpg" alt="Award 1">
+
                 </div>
 
                 <!-- AWARD 2 -->
@@ -1301,6 +1303,10 @@ document.addEventListener("keydown", (event) => {
 
         if (videoModal.classList.contains("active")) {
             closeVideo();
+        }
+
+        if (document.getElementById("awardDetail").classList.contains("active")) {
+            closeAward();
         }
 
         if (document.getElementById("awardDetail").classList.contains("active")) {
