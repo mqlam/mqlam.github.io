@@ -227,6 +227,9 @@ body {
     width: 100%;
     overflow: hidden;
     background: transparent;
+    margin: 0;
+    transform: none;
+    align-self: start;
 }
 
 .photo-item img {
@@ -758,25 +761,7 @@ footer {
     text-align: center;
 }
 
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-    align-items: start;
-}
 
-.photo-item {
-    margin: 0 !important;
-    transform: none !important;
-    align-self: start;
-}
-
-.photo-item img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
 
 </style>
 </head>
